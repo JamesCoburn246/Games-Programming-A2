@@ -465,6 +465,15 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
         mGraphics.fill(polygon);
     }
 
+    // This function draws horizontally centered text from a given y position
+    public void drawCenteredText(double y, String text, String fontName, int fontSize) {
+        Font font = new Font(fontName, Font.PLAIN, fontSize);
+        FontMetrics fontMetrics = mGraphics.getFontMetrics(font);
+        int x = (mGraphics.getClipBounds().width - fontMetrics.stringWidth(text)) / 2;
+        mGraphics.setFont(font);
+        mGraphics.drawString(text, x, (int)y);
+    }
+
     // This function draws text on the screen at (x,y)
     public void drawText(double x, double y, String s) {
         // Draw text on the screen
