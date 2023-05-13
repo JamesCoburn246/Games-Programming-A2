@@ -2,6 +2,8 @@
 // Original Author: D.P.Playne
 // Modified by: James Coburn
 
+package nz.ac.massey.games_programming;
+
 import java.awt.*;
 import java.awt.geom.*;
 
@@ -137,10 +139,10 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
     }
 
     //-------------------------------------------------------
-    // Main Game function
+    // game.Main Game function
     //-------------------------------------------------------
 
-    // GameEngine Constructor
+    // game.GameEngine Constructor
     public GameEngine() {
         // Create graphics transform stack
         mTransforms = new Stack<>();
@@ -195,7 +197,7 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
         }
     }
 
-    // Main Loop of the game. Runs continuously
+    // game.Main Loop of the game. Runs continuously
     // and calls all the updates of the game and
     // tells the game to display a new frame.
     final GameTimer timer = new GameTimer(30, new ActionListener() {
@@ -213,7 +215,7 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
         }
     });
 
-    // The GameEngine main Panel
+    // The game.GameEngine main Panel
     protected class GamePanel extends JPanel {
         @Serial
         private static final long serialVersionUID = 1L;
@@ -245,7 +247,7 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
         timer.setFramerate(framerate);
         timer.setRepeats(true);
 
-        // Main loop runs until program is closed
+        // game.Main loop runs until program is closed
         timer.start();
     }
 
