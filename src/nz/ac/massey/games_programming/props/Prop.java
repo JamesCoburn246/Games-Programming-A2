@@ -1,9 +1,10 @@
+
+// Originally used in A1 by James Coburn.
+
 package nz.ac.massey.games_programming.props;
 
 import nz.ac.massey.games_programming.GameEngine;
 
-
-// Originally used in A1 by James Coburn.
 public abstract class Prop {
 
     private final PropType TYPE;
