@@ -1,4 +1,3 @@
-
 // Originally used in A1 by James Coburn.
 
 package nz.ac.massey.games_programming.props;
