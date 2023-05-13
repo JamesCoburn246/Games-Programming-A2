@@ -81,6 +81,7 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
         mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mFrame.add(mPanel);
         mFrame.setVisible(true);
+        mFrame.setResizable(false);
 
         mPanel.setDoubleBuffered(true);
         mPanel.addMouseListener(this);
