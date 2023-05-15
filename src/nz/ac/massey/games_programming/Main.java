@@ -6,6 +6,7 @@
 
 package nz.ac.massey.games_programming;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.*; // For Color
 
@@ -42,6 +43,32 @@ public class Main extends GameEngine {
         drawCenteredText(400, "Quit", "Arial", 65);
     }
 
+    // Manages user keyboard input
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+
+        switch (keyCode) {
+            // TO-DO: Add character position change
+            // If user presses W or up arrow
+            case KeyEvent.VK_W, KeyEvent.VK_UP -> {
+
+            }
+            // If user presses A or left arrow
+            case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
+
+            }
+            // If user presses S or down arrow
+            case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
+
+            }
+            // If user presses D or right arrow
+            case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
+
+            }
+        }
+    }
+
     // Manages user mouse button input
     @Override
     public void mousePressed(MouseEvent e) {
@@ -73,6 +100,6 @@ public class Main extends GameEngine {
         }
 
         // If the user left-clicks the screen, display that position
-        System.out.println("Left click at position (" + x + ", " + y + ")");
+        // System.out.println("Left click at position (" + x + ", " + y + ")"); // Use for debugging
     }
 }
