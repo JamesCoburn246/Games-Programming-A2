@@ -15,23 +15,16 @@ public class Explosive extends SpriteProp {
     public Explosive(PropType type, int x, int y, Image sprite) {
         super(type, x, y, sprite);
     }
-    public Explosive(PropType type, int x, int y, Image sprite, GameEngine engine, int fuse, int damage, int range) {
+    public Explosive(PropType type, int x, int y, Image sprite, GameEngine engine, int damage, int range) {
         super(type, x, y, sprite);
         this.engine = engine;
-        this.fuse = fuse;
         this.damage = damage;
         this.range = range;
     }
 
-    public void primeExplosive() {
-        System.out.println("The explosive is primed.");
-        ready = true;
-    }
-
-    public void lightFuse() {
-        if (ready) {
-            System.out.println("The fuse has been lit.");
-        }
+    public void lightFuse(int fuse) {
+        this.fuse = fuse;
+        System.out.println("The fuse has been lit.");
     }
 
 }
