@@ -66,6 +66,19 @@ public class Main extends GameEngine {
             case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
 
             }
+            // If user presses space
+            case KeyEvent.VK_SPACE -> {
+
+            }
+            // If user presses E
+            case KeyEvent.VK_E -> {
+
+            }
+            // If user presses escape, display the main menu
+            case KeyEvent.VK_ESCAPE -> {
+                displayMainMenu();
+            }
+
         }
     }
 
