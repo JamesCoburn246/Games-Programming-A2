@@ -2,6 +2,8 @@ package nz.ac.massey.games_programming;
 
 public class Player {
     private int x, y; // x and y co-ordinate of the player
+    private int explosiveCount;
+    private int detonatorCount;
 
     public static void main(String[] args) {
         // 5x5 grid representing the game grid for testing
@@ -53,6 +55,14 @@ public class Player {
     public Player(int startX, int startY) {
         this.x = startX; // startX and startY are the initial starting points for the player
         this.y = startY;
+        this.explosiveCount = 3; // Starting explosive count
+        this.detonatorCount = 3; // Starting detonator count
+    }
+
+    // Resets the explosives back to their starting values
+    public void resetExplosives() {
+        explosiveCount = 3;
+        detonatorCount = 3;
     }
 
     public int getX() {
@@ -61,6 +71,36 @@ public class Player {
 
     public int getY() {
         return y;
+    }
+
+    public int getExplosiveCount() {
+        return explosiveCount;
+    }
+
+    public int getDetonatorCount() {
+        return detonatorCount;
+    }
+
+    /**********************************************************************************
+     ************* Functions to check the explosive count for the player *************
+     * Return TRUE if the count is ABOVE ZERO and DECREMENT the count
+     * Otherwise, return FALSE
+     */
+    public boolean consumeExplosive() {
+        if (explosiveCount > 0) {
+            explosiveCount--;
+            return true;
+        }
+        return false;
+    }
+
+    // If player has more than 0 detonators, consume one
+    public boolean consumeDetonator() {
+        if (detonatorCount > 0) {
+            detonatorCount--;
+            return true;
+        }
+        return false;
     }
 
     /**********************************************************
