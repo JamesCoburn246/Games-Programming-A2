@@ -16,7 +16,10 @@ public class Breakable extends SpriteProp {
     }
 
     public void setHealth(int health) {
-        this.health = health;
+        // Once health hits 0, it stays that way forever.
+        if (this.health != 0)
+            this.health = health;
+    }
 
     /**
      * Deal damage to this sprite; potentially destroying it in the process.
