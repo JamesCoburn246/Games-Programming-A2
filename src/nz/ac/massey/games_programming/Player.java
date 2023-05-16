@@ -4,7 +4,50 @@ public class Player {
     private int x, y; // x and y co-ordinate of the player
 
     public static void main(String[] args) {
-        
+        // 5x5 grid representing the game grid for testing
+        int[][] grid = {
+                {0, 0, 0, 0, 0},
+                {0, 1, 1, 0, 0},
+                {0, 1, 0, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        };
+
+        // New player spawning in at position (2, 2)
+        Player player = new Player(2, 2);
+
+        // Print initial player position
+        System.out.println("Initial position: (" + player.getX() + ", " + player.getY() + ")");
+
+        String[] directions = {"up", "right", "down", "left"};
+
+        for (String direction : directions) {
+            boolean moved = false;
+
+            switch (direction) {
+                case "up":
+                    moved = player.moveUp(grid); // Try to move the player UP in the grid
+                    break;
+                case "right":
+                    moved = player.moveRight(grid); // Try to move the player RIGHT in the grid
+                    break;
+                case "down":
+                    moved = player.moveDown(grid); // Try to move the player DOWN in the grid
+                    break;
+                case "left":
+                    moved = player.moveLeft(grid); // Try to move the player LEFT in the grid
+                    break;
+            }
+
+            // If the player successfully moved, print the new position
+            if (moved) {
+                System.out.println("Moved " + direction + ". New position: (" + player.getX() + ", " + player.getY() + ")");
+            }
+            // If the player cannot move to the new position, print erro message
+            else {
+                System.out.println("Cannot move " + direction + ".");
+            }
+        }
     }
 
     public Player(int startX, int startY) {
