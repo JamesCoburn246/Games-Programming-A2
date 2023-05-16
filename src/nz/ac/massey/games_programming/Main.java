@@ -7,15 +7,14 @@
 package nz.ac.massey.games_programming;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.*; // For Color
 
-public class Main extends GameEngine implements KeyListener {
-
+public class Main extends GameEngine {
+    private static final Color lightBlue = new Color(65, 77, 100);
     private int winWidth = 1280, winHeight = 720;
 
-
     public static void main(String[] args) {
-        System.out.println("Hello world!");
         createGame(new Main(), 30);
     }
 
@@ -30,59 +29,95 @@ public class Main extends GameEngine implements KeyListener {
 
     @Override
     public void paintComponent() {
-
+        displayMainMenu();
     }
 
+    public void displayMainMenu() {
+        // Light blue background
+        changeBackgroundColor(lightBlue);
+        clearBackground(width(), height());
 
+        // Play and Quit Buttons in black text
+        changeColor(Color.black);
+        drawCenteredText(250, "Play", "Arial", 65);
+        drawCenteredText(400, "Quit", "Arial", 65);
+    }
+
+    // Manages user keyboard input
+    @Override
     public void keyPressed(KeyEvent e) {
-        ///////// |W A S D - Movement Keys /////////////
-        if(e.getKeyCode() == KeyEvent.VK_W){
-            System.out.println("W Key is Pressed");
+        int keyCode = e.getKeyCode();
+
+        switch (keyCode) {
+            // TO-DO: Add character position change
+            ///////// W A S D - Movement Keys /////////////
+            ///////// Arrow Key - Movement Keys /////////////
+            // If user presses W or up arrow
+            case KeyEvent.VK_W, KeyEvent.VK_UP -> {
+                System.out.println("KeyPressed: Up");
+            }
+            // If user presses A or left arrow
+            case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
+                System.out.println("KeyPressed: Left");
+            }
+            // If user presses S or down arrow
+            case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
+                System.out.println("KeyPressed: Down");
+            }
+            // If user presses D or right arrow
+            case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
+                System.out.println("KeyPressed: Right");
+            }
+
+            ///////// Special Keys - Interaction and Pause Menu /////////////
+            // If user presses space
+            case KeyEvent.VK_SPACE -> {
+                System.out.println("KeyPressed: Space");
+            }
+            // If user presses E
+            case KeyEvent.VK_E -> {
+                System.out.println("KeyPressed: E");
+            }
+            // If user presses escape, display the main menu
+            case KeyEvent.VK_ESCAPE -> {
+                System.out.println("KeyPressed: Esc");
+                displayMainMenu();
+            }
 
         }
-        if(e.getKeyCode() == KeyEvent.VK_A){
-            System.out.println("A Key is Pressed");
+    }
 
-        }
-        if(e.getKeyCode() == KeyEvent.VK_S){
-            System.out.println("S Key is Pressed");
+    // Manages user mouse button input
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // Gets the x and y co-ordinates where the user clicked
+        int x = e.getX();
+        int y = e.getY();
 
-        }
-        if(e.getKeyCode() == KeyEvent.VK_D){
-            System.out.println("D Key is Pressed");
-
-        }
-        if(e.getKeyCode() == KeyEvent.VK_UP){
-            System.out.println("UP Arrow Key is Pressed");
-
+        // Return if non-left mouse click
+        if (e.getButton() != MouseEvent.BUTTON1) {
+            return;
         }
 
-        ///////// |Arrow Key - Movement Keys /////////////
-        if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            System.out.println("Left Arrow Key is Pressed");
-
-        }
-        if(e.getKeyCode() == KeyEvent.VK_DOWN){
-            System.out.println("Down Arrow Key is Pressed");
-
-        }
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            System.out.println("Right Arrow Key is Pressed");
-
+        // If user clicks the Play button, start the game
+        if (x > 570 && y > 190) {
+            if (x < 716 && y < 270) {
+                System.out.println("Starting the game!");
+                // TO-DO: Add code that starts the game here
+            }
         }
 
-        ///////// |Special Keys - Interaction and Pause Menu /////////////
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            System.out.println("Space Bar Key is Pressed");
-
+        // If user clicks the Quit button, exit the game
+        if (x > 570 && y > 340) {
+            if (x < 710 && y < 410) {
+                System.out.println("Exiting game...");
+                System.exit(420);
+                mFrame.dispose();
+                mFrame.setVisible(false);
+            }
         }
-        if(e.getKeyCode() == KeyEvent.VK_E){
-            System.out.println("E Key is Pressed");
 
-        }
-        if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-            System.out.println("ESC Key is Pressed");
-
-        }
+        // If the user left-clicks the screen, display that position
+        // System.out.println("Left click at position (" + x + ", " + y + ")"); // Use for debugging
     }
 }
