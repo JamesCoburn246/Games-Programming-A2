@@ -50,32 +50,37 @@ public class Main extends GameEngine {
 
         switch (keyCode) {
             // TO-DO: Add character position change
+            ///////// W A S D - Movement Keys /////////////
+            ///////// Arrow Key - Movement Keys /////////////
             // If user presses W or up arrow
             case KeyEvent.VK_W, KeyEvent.VK_UP -> {
-
+                System.out.println("KeyPressed: Up");
             }
             // If user presses A or left arrow
             case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
-
+                System.out.println("KeyPressed: Left");
             }
             // If user presses S or down arrow
             case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
-
+                System.out.println("KeyPressed: Down");
             }
             // If user presses D or right arrow
             case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
-
+                System.out.println("KeyPressed: Right");
             }
+
+            ///////// Special Keys - Interaction and Pause Menu /////////////
             // If user presses space
             case KeyEvent.VK_SPACE -> {
-
+                System.out.println("KeyPressed: Space");
             }
             // If user presses E
             case KeyEvent.VK_E -> {
-
+                System.out.println("KeyPressed: E");
             }
             // If user presses escape, display the main menu
             case KeyEvent.VK_ESCAPE -> {
+                System.out.println("KeyPressed: Esc");
                 displayMainMenu();
             }
 
