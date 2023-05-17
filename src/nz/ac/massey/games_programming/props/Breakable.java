@@ -1,13 +1,14 @@
 package nz.ac.massey.games_programming.props;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Breakable extends SpriteProp {
 
     private int health;
 
-    public Breakable(PropType type, int x, int y, Image sprite, int health) {
-        super(type, x, y, sprite);
+    public Breakable(PropType type, int x, int y, Image sprite, int health, ArrayList<SpriteProp> container) {
+        super(type, x, y, sprite, container);
         this.health = health;
     }
 
