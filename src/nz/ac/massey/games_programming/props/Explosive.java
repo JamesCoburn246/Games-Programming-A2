@@ -12,6 +12,8 @@ public class Explosive extends SpriteProp {
     private int damage;
     private int range;
     private boolean ready = false;
+    private boolean exploded = false;
+    private Image[] explosionAnimation;
 
 
     public Explosive(PropType type, int x, int y, Image sprite, ArrayList<SpriteProp> container) {
@@ -30,9 +32,20 @@ public class Explosive extends SpriteProp {
         System.out.println("The fuse has been lit.");
     }
 
+    public void setAnimations(Image[] fuseAnimation, Image[] explosionAnimation) {
+        this.setAnimation(fuseAnimation);
+        this.explosionAnimation = explosionAnimation;
+    }
+
     @Override
     public void outOfFrames() {
-        container.remove(this);
-        // TODO Detonate explosive?
+        if (!exploded) {
+            // Once we finish the countdown animation, start the explosion animation.
+            exploded = true;
+            setAnimation(explosionAnimation);
+        } else {
+            // Remove this sprite now that it is gone.
+            container.remove(this);
+        }
     }
 }
