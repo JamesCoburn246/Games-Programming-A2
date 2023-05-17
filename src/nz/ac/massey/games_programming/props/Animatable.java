@@ -5,7 +5,7 @@ import nz.ac.massey.games_programming.GameEngine;
 import java.awt.*;
 
 public interface Animatable {
-    void setSprites(Image[] sprite);
+    void setAnimation(Image[] sprite);
 
     void nextFrame();
 

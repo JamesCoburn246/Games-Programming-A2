@@ -8,8 +8,8 @@ public class Breakable extends SpriteProp {
     private int health;
 
 
-    public Breakable(PropType type, int x, int y, Image sprite, int health, ArrayList<SpriteProp> container) {
-        super(type, x, y, sprite, container);
+    public Breakable(PropType type, int x, int y, ArrayList<SpriteProp> container, int health) {
+        super(type, x, y, container);
         this.health = health;
     }
 

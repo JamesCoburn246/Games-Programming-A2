@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Stone extends Breakable {
 
-    public Stone(PropType type, int x, int y, Image sprite, int health, ArrayList<SpriteProp> container) {
-        super(type, x, y, sprite, health, container);
+    public Stone(PropType type, int x, int y, ArrayList<SpriteProp> container, int health) {
+        super(type, x, y, container, health);
     }
 
 }

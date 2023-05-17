@@ -14,10 +14,9 @@ public abstract class SpriteProp extends Prop implements Animatable {
     private Image[] sprites;
     private int spriteIndex;
 
-    public SpriteProp(PropType type, int x, int y, Image sprite, ArrayList<SpriteProp> container) {
+    public SpriteProp(PropType type, int x, int y, ArrayList<SpriteProp> container) {
         super(type, x, y);
         this.container = container;
-        setSprite(sprite);
     }
 
     public void setSprite(Image sprite) {
@@ -25,9 +24,11 @@ public abstract class SpriteProp extends Prop implements Animatable {
     }
 
     @Override
-    public void setSprites(Image[] sprites) {
-        this.sprites = sprites;
-        resetFrames();
+    public void setAnimation(Image[] sprites) {
+        if (sprites != null) {
+            this.sprites = sprites;
+            resetFrames();
+        }
     }
 
     public void resetFrames() {
