@@ -6,39 +6,31 @@
 
 package nz.ac.massey.games_programming;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.*; // For Color
 
 public class Main extends GameEngine {
 
     private static final Color lightBlue = new Color(65, 77, 100);
     public int winWidth = 1280, winHeight = 720;
-
-
+    // Manages user keyboard input
+    int keyPressed;
+    boolean bombDropped;
+    boolean isgameStarted;
 
     public static void main(String[] args) {
-
         createGame(new Main(), 30);
-
-
     }
 
     public void init() {
         setWindowSize(winWidth, winHeight);
-
-
     }
-
-
-
-
-
 
     @Override
     public void update(double dt) {
-
-        if (bombDropped == true && isgameStarted == true) {          // Currently set to Space Bar (Maybe Space to place, "E" to blow up bombs?
+        // Currently set to Space Bar (Maybe "Space" to place, "E" to blow up bombs?).
+        if (bombDropped && isgameStarted) {
             Grid grid = new Grid();
             int winWidth = 1280;
             int winHeight = 720;
@@ -47,16 +39,11 @@ public class Main extends GameEngine {
             int cellIndex = grid.calculateGrid(winWidth, winHeight, pointX, pointY);
             System.out.println("Bomb Dropped At Grid Refence: " + cellIndex);
             bombDropped = false;
-
         }
-
-
-
     }
 
     @Override
     public void paintComponent() {
-
         displayMainMenu();
     }
 
@@ -71,9 +58,6 @@ public class Main extends GameEngine {
         drawCenteredText(400, "Quit", "Arial", 65);
     }
 
-    // Manages user keyboard input
-    int keyPressed;
-    boolean bombDropped;
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
@@ -119,10 +103,9 @@ public class Main extends GameEngine {
                 System.out.println("KeyPressed: Esc");
                 displayMainMenu();
             }
-
         }
     }
-    boolean isgameStarted;
+
     // Manages user mouse button input
     @Override
     public void mousePressed(MouseEvent e) {
@@ -186,10 +169,8 @@ public class Main extends GameEngine {
                     break;
                 }
             }
-
             return cellIndex;
         }
-
     }
 
 }
