@@ -34,13 +34,13 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
     //-------------------------------------------------------
 
     // Returns the time in milliseconds
-    public long getTime() {
+    public static long getTime() {
         // Get the current time from the system
         return System.currentTimeMillis();
     }
 
     // Waits for ms milliseconds
-    public void sleep(double ms) {
+    public static void sleep(double ms) {
         try {
             // Sleep
             Thread.sleep((long) ms);
@@ -531,7 +531,7 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
     //-------------------------------------------------------
 
     // Loads an image from file
-    public Image loadImage(String filename) {
+    public static Image loadImage(String filename) {
         try {
             return ImageIO.read(new File(filename));
         } catch (IOException e) {
@@ -545,7 +545,7 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
     }
 
     // Loads a sub-image out of an image
-    public Image subImage(Image source, int x, int y, int w, int h) {
+    public static Image subImage(Image source, int x, int y, int w, int h) {
         // Check if image is null
         if (source == null) {
             // Print Error message
