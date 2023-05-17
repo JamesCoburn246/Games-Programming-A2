@@ -7,6 +7,7 @@ public class Breakable extends SpriteProp {
 
     private int health;
 
+
     public Breakable(PropType type, int x, int y, Image sprite, int health, ArrayList<SpriteProp> container) {
         super(type, x, y, sprite, container);
         this.health = health;
@@ -24,6 +25,7 @@ public class Breakable extends SpriteProp {
 
     /**
      * Deal damage to this sprite; potentially destroying it in the process.
+     *
      * @param damage the amount of damage to be done to health.
      * @return true if the object was destroyed, or false if it survived.
      */

@@ -6,9 +6,9 @@
 
 package nz.ac.massey.games_programming;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.*; // For Color
 
 public class Main extends GameEngine {
     private static final Color lightBlue = new Color(65, 77, 100);

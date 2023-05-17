@@ -11,11 +11,13 @@ public class Explosive extends SpriteProp {
     private int fuse;
     private int damage;
     private int range;
-
     private boolean ready = false;
+
+
     public Explosive(PropType type, int x, int y, Image sprite, ArrayList<SpriteProp> container) {
         super(type, x, y, sprite, container);
     }
+
     public Explosive(PropType type, int x, int y, Image sprite, ArrayList<SpriteProp> container, GameEngine engine, int damage, int range) {
         super(type, x, y, sprite, container);
         this.engine = engine;

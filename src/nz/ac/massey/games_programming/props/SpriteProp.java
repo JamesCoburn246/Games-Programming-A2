@@ -9,11 +9,10 @@ import java.util.ArrayList;
 
 public abstract class SpriteProp extends Prop implements Animatable {
 
+    protected ArrayList<SpriteProp> container;
     private Image sprite;
     private Image[] sprites;
     private int spriteIndex;
-
-    protected ArrayList<SpriteProp> container;
 
     public SpriteProp(PropType type, int x, int y, Image sprite, ArrayList<SpriteProp> container) {
         super(type, x, y);
