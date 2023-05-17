@@ -13,6 +13,9 @@ import java.awt.event.MouseEvent;
 public class Main extends GameEngine {
 
     private static final Color lightBlue = new Color(65, 77, 100);
+
+    private static final int GRID_WIDTH = 20, GRID_HEIGHT = 20;
+    private final Grid grid = new Grid(GRID_WIDTH, GRID_HEIGHT);
     public int winWidth = 1280, winHeight = 720;
     // Manages user keyboard input
     int keyPressed;
@@ -25,19 +28,17 @@ public class Main extends GameEngine {
 
     public void init() {
         setWindowSize(winWidth, winHeight);
+
     }
 
     @Override
     public void update(double dt) {
         // Currently set to Space Bar (Maybe "Space" to place, "E" to blow up bombs?).
         if (bombDropped && isGameStarted) {
-            Grid grid = new Grid();
-            int winWidth = 1280;
-            int winHeight = 720;
             int pointX = 500;  // Example,Change to currentPlayPos or whatever
             int pointY = 500;  // Example, currentPlayPos or whatever
             int cellIndex = grid.calculateGrid(winWidth, winHeight, pointX, pointY);
-            System.out.println("Bomb Dropped At Grid Refence: " + cellIndex);
+            System.out.println("Bomb Dropped At Grid Reference: " + cellIndex);
             bombDropped = false;
         }
     }
@@ -140,37 +141,6 @@ public class Main extends GameEngine {
 
         // If the user left-clicks the screen, display that position
         // System.out.println("Left click at position (" + x + ", " + y + ")"); // Use for debugging
-    }
-
-    /////////// GRID LOGIC ////////////// Works out cells of 33x33 based off the given resolution (1280x720) and calculates a grid reference.
-    public class Grid {
-
-        public int calculateGrid(int winWidth, int winHeight, int pointX, int pointY) {
-            int cellWidth = 33;     // Matching 33x33 Sprites
-            int cellHeight = 33;    // Matching 33x33 Sprites
-
-            int numRows = winHeight / cellHeight;
-            int numCols = winWidth / cellWidth;
-
-            int cellIndex = -1;  // Default value if Given point is outside boundary
-
-            for (int row = 0; row < numRows; row++) {
-                for (int col = 0; col < numCols; col++) {
-                    int x = col * cellWidth;
-                    int y = row * cellHeight;
-
-                    // Check if the point is within the current cell
-                    if (pointX >= x && pointX < x + cellWidth && pointY >= y && pointY < y + cellHeight) {
-                        cellIndex = row * numCols + col;
-                        break;
-                    }
-                }
-                if (cellIndex != -1) {
-                    break;
-                }
-            }
-            return cellIndex;
-        }
     }
 
 }
