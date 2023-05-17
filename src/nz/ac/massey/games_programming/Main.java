@@ -14,6 +14,9 @@ public class Main extends GameEngine {
 
     private static final Color lightBlue = new Color(65, 77, 100);
 
+
+
+
     private static final int GRID_WIDTH = 20, GRID_HEIGHT = 20;
     private final Grid grid = new Grid(GRID_WIDTH, GRID_HEIGHT);
     public GameState gameState = GameState.MAIN_MENU;
@@ -36,6 +39,27 @@ public class Main extends GameEngine {
 
     @Override
     public void update(double dt) {
+        // MENU AND IN-GAME MUSIC //
+        if (gameState == GameState.MAIN_MENU) {
+            AudioClip MenuMusic = loadAudio("Sounds/MenuMusic.wav");
+            startAudioLoop(MenuMusic, 20);
+            if (gameState == GameState.PLAYING) {
+                stopAudioLoop(MenuMusic);
+            }
+        }
+        if (gameState == GameState.PLAYING) {
+            AudioClip GameStart = loadAudio("Sounds/GameStart.wav");
+            playAudio(GameStart,50);
+            AudioClip GameMusic = loadAudio("Sounds/GameMusic.wav");
+            startAudioLoop(GameMusic, 20);
+            if (gameState == GameState.MAIN_MENU) {
+                stopAudioLoop(GameMusic);
+            }
+        }
+
+
+
+
         // Currently set to Space Bar (Maybe "Space" to place, "E" to blow up bombs?).
         if (bombDropped && gameState == GameState.PLAYING) {
             int pointX = 500;  // Example,Change to currentPlayPos or whatever
@@ -44,6 +68,7 @@ public class Main extends GameEngine {
             System.out.println("Bomb Dropped At Grid Reference: " + cellIndex);
             bombDropped = false;
         }
+
     }
 
     @Override
@@ -185,4 +210,6 @@ public class Main extends GameEngine {
     public enum GameState {
         MAIN_MENU, PLAYING, PAUSED, GAME_OVER
     }
+
+
 }
