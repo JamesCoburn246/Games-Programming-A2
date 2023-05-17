@@ -2,15 +2,13 @@ package nz.ac.massey.games_programming.props;
 
 import nz.ac.massey.games_programming.Grid;
 
-import java.awt.*;
-
 public class Breakable extends SpriteProp {
 
     private int health;
 
 
-    public Breakable(PropType type, int x, int y, Image sprite, int health, Grid.Cell cell) {
-        super(type, x, y, sprite, cell);
+    public Breakable(PropType type, int x, int y, int health, Grid.Cell cell) {
+        super(type, x, y, cell);
         this.health = health;
     }
 

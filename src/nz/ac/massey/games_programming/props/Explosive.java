@@ -13,13 +13,12 @@ public class Explosive extends SpriteProp {
     private int range;
     private boolean ready = false;
 
-
-    public Explosive(int x, int y, Image sprite, Grid.Cell cell) {
-        super(PropType.EXPLOSIVE, x, y, sprite, cell);
+    public Explosive(int x, int y, Grid.Cell cell) {
+        super(PropType.EXPLOSIVE, x, y, cell);
     }
 
-    public Explosive(int x, int y, Image sprite, Grid.Cell cell, GameEngine engine, int damage, int range) {
-        super(PropType.EXPLOSIVE, x, y, sprite, cell);
+    public Explosive(int x, int y, Grid.Cell cell, GameEngine engine, int damage, int range) {
+        super(PropType.EXPLOSIVE, x, y, cell);
         this.engine = engine;
         this.damage = damage;
         this.range = range;

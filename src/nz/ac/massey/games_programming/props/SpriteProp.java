@@ -6,7 +6,6 @@ import nz.ac.massey.games_programming.GameEngine;
 import nz.ac.massey.games_programming.Grid;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public abstract class SpriteProp extends Prop implements Animatable {
 
@@ -15,10 +14,9 @@ public abstract class SpriteProp extends Prop implements Animatable {
     private Image[] sprites;
     private int spriteIndex;
 
-    public SpriteProp(PropType type, int x, int y, Image sprite, Grid.Cell cell) {
+    public SpriteProp(PropType type, int x, int y, Grid.Cell cell) {
         super(type, x, y);
         this.cell = cell;
-        setSprite(sprite);
     }
 
     public void setSprite(Image sprite) {
