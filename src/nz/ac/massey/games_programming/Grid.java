@@ -4,12 +4,25 @@ import nz.ac.massey.games_programming.props.Prop;
 
 public class Grid {
     public final int COLS, ROWS;
-    Cell[][] cells;
+    private Cell[][] cells;
 
     public Grid(int width, int height) {
         COLS = width;
         ROWS = height;
         cells = new Cell[COLS][ROWS];
+        reset();
+    }
+
+    public void reset() {
+        for (int col = 0; col < COLS; col++) {
+            for (int row = 0; row < ROWS; row++) {
+                cells[col][row] = new Cell();
+            }
+        }
+    }
+
+    public Cell getCell(int col, int row) {
+        return cells[col][row];
     }
 
     public void drawAll(GameEngine engine) {
