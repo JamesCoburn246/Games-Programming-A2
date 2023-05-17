@@ -16,6 +16,8 @@ public class Main extends GameEngine {
 
     private static final int GRID_WIDTH = 20, GRID_HEIGHT = 20;
     private final Grid grid = new Grid(GRID_WIDTH, GRID_HEIGHT);
+    public final GameState gameState = GameState.MAIN_MENU;
+
     // Manages user keyboard input
     int keyPressed;
     boolean bombDropped;
@@ -44,11 +46,25 @@ public class Main extends GameEngine {
 
     @Override
     public void paintComponent() {
-        displayMainMenu();
+        switch (gameState) {
+            case MAIN_MENU -> {
+                paintMainMenu();
+            }
+            case PLAYING, PAUSED -> {
+                paintGame();
+            }
+            case GAME_OVER -> {
+                paintGame();
+                paintEndGameOverlay();
+            }
+        }
     }
 
-    public void displayMainMenu() {
-        // Light blue background
+    /**
+     * Paint the main menu screen that is used at the start of the game and when Esc is pressed.
+     */
+    private void paintMainMenu() {
+        // Reset background.
         changeBackgroundColor(lightBlue);
         clearBackground(width(), height());
 
@@ -56,6 +72,26 @@ public class Main extends GameEngine {
         changeColor(Color.black);
         drawCenteredText(250, "Play", "Arial", 65);
         drawCenteredText(400, "Quit", "Arial", 65);
+    }
+
+    /**
+     * Paint the grid, each prop, the player, etc.
+     */
+    private void paintGame() {
+        // Reset background.
+        changeBackgroundColor(Color.darkGray);
+        clearBackground(width(), height());
+
+        // Draw each item in the grid.
+        grid.drawAll(this);
+
+    }
+
+    /**
+     * Paint the end game screen overtop of the actual game.
+     */
+    private void paintEndGameOverlay() {
+
     }
 
     @Override
@@ -101,7 +137,7 @@ public class Main extends GameEngine {
             // If user presses escape, display the main menu
             case KeyEvent.VK_ESCAPE -> {
                 System.out.println("KeyPressed: Esc");
-                displayMainMenu();
+                paintMainMenu();
             }
         }
     }
@@ -142,4 +178,7 @@ public class Main extends GameEngine {
         // System.out.println("Left click at position (" + x + ", " + y + ")"); // Use for debugging
     }
 
+    public enum GameState {
+        MAIN_MENU, PLAYING, PAUSED, GAME_OVER
+    }
 }
