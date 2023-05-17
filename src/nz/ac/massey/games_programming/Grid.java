@@ -12,6 +12,16 @@ public class Grid {
         cells = new Cell[COLS][ROWS];
     }
 
+    public void drawAll(GameEngine engine) {
+        for (int col = 0; col < COLS; col++) {
+            for (int row = 0; row < ROWS; row++) {
+                int x_offset = COLS * Cell.CELL_WIDTH;
+                int y_offset = ROWS * Cell.CELL_HEIGHT;
+                cells[col][row].drawContents(engine, x_offset, y_offset, Cell.CELL_WIDTH, Cell.CELL_HEIGHT);
+            }
+        }
+    }
+
     public int determineScreenWidth() {
         return this.COLS * Cell.CELL_WIDTH;
     }
@@ -49,7 +59,7 @@ public class Grid {
 
         public static final int CELL_WIDTH = 32, CELL_HEIGHT = 32;
 
-        Prop prop;
+        private Prop prop;
 
         public Cell() {
             this(null);
@@ -59,12 +69,22 @@ public class Grid {
             setContents(prop);
         }
 
+        public Prop getContents() {
+            return this.prop;
+        }
+
         public void setContents(Prop newContents) {
             this.prop = newContents;
         }
 
-        public Prop getContents() {
-            return this.prop;
+        public void drawContents(GameEngine engine, int x_offset, int y_offset, int x_width, int y_width) {
+            if (this.prop != null) {
+                this.prop.draw(engine, x_offset, y_offset, x_width, y_width);
+            }
+        }
+
+        public void clearContents() {
+            this.prop = null;
         }
     }
 }
