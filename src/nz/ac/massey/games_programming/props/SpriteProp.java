@@ -3,20 +3,21 @@
 package nz.ac.massey.games_programming.props;
 
 import nz.ac.massey.games_programming.GameEngine;
+import nz.ac.massey.games_programming.Grid;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public abstract class SpriteProp extends Prop implements Animatable {
 
-    protected ArrayList<SpriteProp> container;
+    protected Grid.Cell cell;
     private Image sprite;
     private Image[] sprites;
     private int spriteIndex;
 
-    public SpriteProp(PropType type, int x, int y, Image sprite, ArrayList<SpriteProp> container) {
+    public SpriteProp(PropType type, int x, int y, Image sprite, Grid.Cell cell) {
         super(type, x, y);
-        this.container = container;
+        this.cell = cell;
         setSprite(sprite);
     }
 
