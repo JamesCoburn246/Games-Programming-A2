@@ -6,8 +6,8 @@ import java.awt.*;
 
 public class Stone extends Breakable {
 
-    public Stone(PropType type, int x, int y, Image sprite, int health, Grid.Cell cell) {
-        super(type, x, y, sprite, health, cell);
+    public Stone(int x, int y, Image sprite, int health, Grid.Cell cell) {
+        super(PropType.ROCK, x, y, sprite, health, cell);
     }
 
 }
