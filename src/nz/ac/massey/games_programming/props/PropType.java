@@ -1,5 +1,5 @@
 package nz.ac.massey.games_programming.props;
 
-enum PropType {
+public enum PropType {
     NONE, ROCK, DIRT, EXPLOSIVE
 }
