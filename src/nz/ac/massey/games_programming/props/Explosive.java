@@ -3,6 +3,7 @@ package nz.ac.massey.games_programming.props;
 import nz.ac.massey.games_programming.GameEngine;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Explosive extends SpriteProp {
 
@@ -10,13 +11,15 @@ public class Explosive extends SpriteProp {
     private int fuse;
     private int damage;
     private int range;
-
     private boolean ready = false;
-    public Explosive(PropType type, int x, int y, Image sprite) {
-        super(type, x, y, sprite);
+
+
+    public Explosive(PropType type, int x, int y, Image sprite, ArrayList<SpriteProp> container) {
+        super(type, x, y, sprite, container);
     }
-    public Explosive(PropType type, int x, int y, Image sprite, GameEngine engine, int damage, int range) {
-        super(type, x, y, sprite);
+
+    public Explosive(PropType type, int x, int y, Image sprite, ArrayList<SpriteProp> container, GameEngine engine, int damage, int range) {
+        super(type, x, y, sprite, container);
         this.engine = engine;
         this.damage = damage;
         this.range = range;
@@ -27,4 +30,9 @@ public class Explosive extends SpriteProp {
         System.out.println("The fuse has been lit.");
     }
 
+    @Override
+    public void outOfFrames() {
+        container.remove(this);
+        // TODO Detonate explosive?
+    }
 }
