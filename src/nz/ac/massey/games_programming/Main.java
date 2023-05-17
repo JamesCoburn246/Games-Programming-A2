@@ -17,7 +17,7 @@ public class Main extends GameEngine {
     // Manages user keyboard input
     int keyPressed;
     boolean bombDropped;
-    boolean isgameStarted;
+    boolean isGameStarted;
 
     public static void main(String[] args) {
         createGame(new Main(), 30);
@@ -30,7 +30,7 @@ public class Main extends GameEngine {
     @Override
     public void update(double dt) {
         // Currently set to Space Bar (Maybe "Space" to place, "E" to blow up bombs?).
-        if (bombDropped && isgameStarted) {
+        if (bombDropped && isGameStarted) {
             Grid grid = new Grid();
             int winWidth = 1280;
             int winHeight = 720;
@@ -122,7 +122,7 @@ public class Main extends GameEngine {
         if (x > 570 && y > 190) {
             if (x < 716 && y < 270) {
                 System.out.println("Starting the game!");
-                isgameStarted = true;
+                isGameStarted = true;
                 // TO-DO: Add code that starts the game here
             }
         }
@@ -131,7 +131,7 @@ public class Main extends GameEngine {
         if (x > 570 && y > 340) {
             if (x < 710 && y < 410) {
                 System.out.println("Exiting game...");
-                isgameStarted = false;
+                isGameStarted = false;
                 System.exit(420);
                 mFrame.dispose();
                 mFrame.setVisible(false);
