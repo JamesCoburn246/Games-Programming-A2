@@ -8,4 +8,9 @@ public class Collectable extends SpriteProp {
     public Collectable(PropType type, int x, int y, Image sprite, ArrayList<SpriteProp> container) {
         super(type, x, y, sprite, container);
     }
+
+    @Override
+    public void outOfFrames() {
+        resetFrames();
+    }
 }

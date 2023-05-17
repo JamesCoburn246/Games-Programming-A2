@@ -28,4 +28,9 @@ public class Explosive extends SpriteProp {
         System.out.println("The fuse has been lit.");
     }
 
+    @Override
+    public void outOfFrames() {
+        container.remove(this);
+        // TODO Detonate explosive?
+    }
 }

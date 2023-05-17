@@ -37,4 +37,8 @@ public class Breakable extends SpriteProp {
             return false;
         }
     }
+
+    public void outOfFrames() {
+        super.container.remove(this);
+    }
 }
