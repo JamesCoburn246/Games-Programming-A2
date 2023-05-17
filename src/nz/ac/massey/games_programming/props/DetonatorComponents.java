@@ -1,10 +1,11 @@
 package nz.ac.massey.games_programming.props;
 
+import nz.ac.massey.games_programming.Grid;
+
 import java.awt.*;
-import java.util.ArrayList;
 
 public class DetonatorComponents extends Collectable {
-    public DetonatorComponents(PropType type, int x, int y, Image sprite, ArrayList<SpriteProp> container) {
-        super(type, x, y, sprite, container);
+    public DetonatorComponents(PropType type, int x, int y, Image sprite, Grid.Cell cell) {
+        super(type, x, y, sprite, cell);
     }
 }

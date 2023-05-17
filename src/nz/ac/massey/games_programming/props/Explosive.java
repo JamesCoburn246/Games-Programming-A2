@@ -4,7 +4,6 @@ import nz.ac.massey.games_programming.GameEngine;
 import nz.ac.massey.games_programming.Grid;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Explosive extends SpriteProp {
 

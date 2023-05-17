@@ -3,7 +3,6 @@ package nz.ac.massey.games_programming.props;
 import nz.ac.massey.games_programming.Grid;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Stone extends Breakable {
 

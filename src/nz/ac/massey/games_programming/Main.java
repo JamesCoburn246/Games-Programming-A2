@@ -84,6 +84,8 @@ public class Main extends GameEngine {
         // Draw each item in the grid.
         grid.drawAll(this);
 
+        // Draw the player.
+        // TODO Implement.
     }
 
     /**
@@ -98,7 +100,7 @@ public class Main extends GameEngine {
         int keyCode = e.getKeyCode();
 
         switch (keyCode) {
-            // TO-DO: Add character position change
+            // TODO: Add character position change
             ///////// W A S D - Movement Keys /////////////
             ///////// Arrow Key - Movement Keys /////////////
             // If user presses W or up arrow
