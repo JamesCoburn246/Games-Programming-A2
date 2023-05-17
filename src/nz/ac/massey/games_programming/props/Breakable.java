@@ -1,15 +1,14 @@
 package nz.ac.massey.games_programming.props;
 
-import java.awt.*;
-import java.util.ArrayList;
+import nz.ac.massey.games_programming.Grid;
 
 public class Breakable extends SpriteProp {
 
     private int health;
 
 
-    public Breakable(PropType type, int x, int y, Image sprite, int health, ArrayList<SpriteProp> container) {
-        super(type, x, y, sprite, container);
+    public Breakable(PropType type, int x, int y, int health, Grid.Cell cell) {
+        super(type, x, y, cell);
         this.health = health;
     }
 
@@ -41,6 +40,6 @@ public class Breakable extends SpriteProp {
     }
 
     public void outOfFrames() {
-        super.container.remove(this);
+        super.cell.clearContents();
     }
 }

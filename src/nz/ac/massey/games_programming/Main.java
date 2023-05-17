@@ -11,29 +11,62 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class Main extends GameEngine {
+
     private static final Color lightBlue = new Color(65, 77, 100);
-    private int winWidth = 1280, winHeight = 720;
+
+    private static final int GRID_WIDTH = 20, GRID_HEIGHT = 20;
+    private final Grid grid = new Grid(GRID_WIDTH, GRID_HEIGHT);
+    public GameState gameState = GameState.MAIN_MENU;
+
+    // Manages user keyboard input
+    int keyPressed;
+    boolean bombDropped;
 
     public static void main(String[] args) {
         createGame(new Main(), 30);
     }
 
     public void init() {
-        setWindowSize(winWidth, winHeight);
+        // Determine how wide the game window needs to be.
+        // NOTE: This can be extended for elements outside the grid.
+        mWidth = grid.determineScreenWidth();
+        mHeight = grid.determineScreenHeight();
+        setWindowSize(width(), height());
     }
 
     @Override
     public void update(double dt) {
-
+        // Currently set to Space Bar (Maybe "Space" to place, "E" to blow up bombs?).
+        if (bombDropped && gameState == GameState.PLAYING) {
+            int pointX = 500;  // Example,Change to currentPlayPos or whatever
+            int pointY = 500;  // Example, currentPlayPos or whatever
+            int cellIndex = grid.calculateGrid(width(), height(), pointX, pointY);
+            System.out.println("Bomb Dropped At Grid Reference: " + cellIndex);
+            bombDropped = false;
+        }
     }
 
     @Override
     public void paintComponent() {
-        displayMainMenu();
+        switch (gameState) {
+            case MAIN_MENU -> {
+                paintMainMenu();
+            }
+            case PLAYING, PAUSED -> {
+                paintGame();
+            }
+            case GAME_OVER -> {
+                paintGame();
+                paintEndGameOverlay();
+            }
+        }
     }
 
-    public void displayMainMenu() {
-        // Light blue background
+    /**
+     * Paint the main menu screen that is used at the start of the game and when Esc is pressed.
+     */
+    private void paintMainMenu() {
+        // Reset background.
         changeBackgroundColor(lightBlue);
         clearBackground(width(), height());
 
@@ -43,47 +76,73 @@ public class Main extends GameEngine {
         drawCenteredText(400, "Quit", "Arial", 65);
     }
 
-    // Manages user keyboard input
+    /**
+     * Paint the grid, each prop, the player, etc.
+     */
+    private void paintGame() {
+        // Reset background.
+        changeBackgroundColor(Color.darkGray);
+        clearBackground(width(), height());
+
+        // Draw each item in the grid.
+        grid.drawAll(this);
+
+        // Draw the player.
+        // TODO Implement.
+    }
+
+    /**
+     * Paint the end game screen overtop of the actual game.
+     */
+    private void paintEndGameOverlay() {
+
+    }
+
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
         switch (keyCode) {
-            // TO-DO: Add character position change
+            // TODO: Add character position change
             ///////// W A S D - Movement Keys /////////////
             ///////// Arrow Key - Movement Keys /////////////
             // If user presses W or up arrow
             case KeyEvent.VK_W, KeyEvent.VK_UP -> {
                 System.out.println("KeyPressed: Up");
+                keyPressed = 1;
             }
             // If user presses A or left arrow
             case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
                 System.out.println("KeyPressed: Left");
+                keyPressed = 2;
             }
             // If user presses S or down arrow
             case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
                 System.out.println("KeyPressed: Down");
+                keyPressed = 3;
             }
             // If user presses D or right arrow
             case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
                 System.out.println("KeyPressed: Right");
+                keyPressed = 4;
             }
 
             ///////// Special Keys - Interaction and Pause Menu /////////////
             // If user presses space
             case KeyEvent.VK_SPACE -> {
                 System.out.println("KeyPressed: Space");
+                bombDropped = true;
+
             }
-            // If user presses E
+            // If user presses E //// DROP BOMB
             case KeyEvent.VK_E -> {
                 System.out.println("KeyPressed: E");
             }
             // If user presses escape, display the main menu
             case KeyEvent.VK_ESCAPE -> {
                 System.out.println("KeyPressed: Esc");
-                displayMainMenu();
+                paintMainMenu();
             }
-
         }
     }
 
@@ -103,6 +162,7 @@ public class Main extends GameEngine {
         if (x > 570 && y > 190) {
             if (x < 716 && y < 270) {
                 System.out.println("Starting the game!");
+                gameState = GameState.PLAYING;
                 // TO-DO: Add code that starts the game here
             }
         }
@@ -111,6 +171,7 @@ public class Main extends GameEngine {
         if (x > 570 && y > 340) {
             if (x < 710 && y < 410) {
                 System.out.println("Exiting game...");
+                gameState = GameState.GAME_OVER;
                 System.exit(420);
                 mFrame.dispose();
                 mFrame.setVisible(false);
@@ -119,5 +180,9 @@ public class Main extends GameEngine {
 
         // If the user left-clicks the screen, display that position
         // System.out.println("Left click at position (" + x + ", " + y + ")"); // Use for debugging
+    }
+
+    public enum GameState {
+        MAIN_MENU, PLAYING, PAUSED, GAME_OVER
     }
 }
