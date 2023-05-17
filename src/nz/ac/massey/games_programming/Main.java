@@ -16,7 +16,6 @@ public class Main extends GameEngine {
 
     private static final int GRID_WIDTH = 20, GRID_HEIGHT = 20;
     private final Grid grid = new Grid(GRID_WIDTH, GRID_HEIGHT);
-    public int winWidth = 1280, winHeight = 720;
     // Manages user keyboard input
     int keyPressed;
     boolean bombDropped;
@@ -27,7 +26,7 @@ public class Main extends GameEngine {
     }
 
     public void init() {
-        setWindowSize(winWidth, winHeight);
+        setWindowSize(width(), height());
 
     }
 
@@ -37,7 +36,7 @@ public class Main extends GameEngine {
         if (bombDropped && isGameStarted) {
             int pointX = 500;  // Example,Change to currentPlayPos or whatever
             int pointY = 500;  // Example, currentPlayPos or whatever
-            int cellIndex = grid.calculateGrid(winWidth, winHeight, pointX, pointY);
+            int cellIndex = grid.calculateGrid(width(), height(), pointX, pointY);
             System.out.println("Bomb Dropped At Grid Reference: " + cellIndex);
             bombDropped = false;
         }
