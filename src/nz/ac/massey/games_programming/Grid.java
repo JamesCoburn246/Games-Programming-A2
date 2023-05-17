@@ -4,7 +4,7 @@ import nz.ac.massey.games_programming.props.Prop;
 
 public class Grid {
     public final int COLS, ROWS;
-    private Cell[][] cells;
+    private final Cell[][] cells;
 
     public Grid(int width, int height) {
         COLS = width;
