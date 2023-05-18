@@ -15,7 +15,7 @@ public class Main extends GameEngine {
     private static final Color lightBlue = new Color(65, 77, 100);
     private static final int GRID_WIDTH = 20, GRID_HEIGHT = 20;
     private final Grid grid = new Grid(GRID_WIDTH, GRID_HEIGHT);
-    public GameState gameState = new GameState();
+    public GameState gameState;
     // Manages user keyboard input
     int keyPressed;
     boolean bombDropped;
@@ -30,7 +30,9 @@ public class Main extends GameEngine {
         mWidth = grid.determineScreenWidth();
         mHeight = grid.determineScreenHeight();
         setWindowSize(width(), height());
-        // Sets Initial Game State and Outputs to Console
+        
+        // Sets initial GameState and outputs to console
+        this.gameState = new GameState(this);
         gameState.setGameState(GameState.State.MAIN_MENU);
         GameState.State currentState = gameState.getGameState();
         System.out.println("Game State: " + currentState);

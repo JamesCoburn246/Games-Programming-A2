@@ -1,7 +1,23 @@
 package nz.ac.massey.games_programming;
 
 public class GameState {
+
+    private static GameEngine.AudioClip menuMusic;
+    private static GameEngine.AudioClip gameMusic;
+    private static GameEngine.AudioClip gameStart;
+
+    static {
+        GameState.menuMusic = GameEngine.loadAudio("Sounds/MenuMusic.wav");
+        GameState.gameMusic = GameEngine.loadAudio("Sounds/MenuMusic.wav");
+        GameState.gameStart = GameEngine.loadAudio("Sounds/gameStart.wav");
+    }
+
+    private final Main game;
     private State currentState;
+
+    public GameState(Main game) {
+        this.game = game;
+    }
 
     // Game State Getter
     public State getGameState() {
@@ -11,21 +27,18 @@ public class GameState {
     // GameState Setter - When the GameState changes the Audio changes along with it
     public void setGameState(State state) {
         currentState = state;
-        AudioClip MenuMusic = loadAudio("Sounds/MenuMusic.wav");
-        AudioClip GameMusic = loadAudio("Sounds/MenuMusic.wav");
-        AudioClip GameStart = loadAudio("Sounds/gameStart.wav");
         if (currentState == State.MAIN_MENU) {
-            stopAudioLoop(GameMusic);
-            startAudioLoop(MenuMusic, 20);
+            game.stopAudioLoop(gameMusic);
+            game.startAudioLoop(menuMusic, 20);
         }
         if (currentState == State.PLAYING) {
-            stopAudioLoop(MenuMusic);
-            playAudio(GameStart);
-            startAudioLoop(GameMusic, 20);
+            game.stopAudioLoop(menuMusic);
+            game.playAudio(gameStart);
+            game.startAudioLoop(gameMusic, 20);
         }
         if (currentState == State.PAUSED) {
-            stopAudioLoop(GameMusic);
-            startAudioLoop(MenuMusic, 20);
+            game.stopAudioLoop(gameMusic);
+            game.startAudioLoop(menuMusic, 20);
         }
     }
 
