@@ -55,7 +55,7 @@ public abstract class SpriteProp extends Prop implements Animatable {
 
     @Override
     public void nextFrame() {
-        if (++spriteIndex < sprites.length) {
+        if (++spriteIndex >= sprites.length) {
             outOfFrames();
         }
     }
