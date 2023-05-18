@@ -34,6 +34,10 @@ public class Main extends GameEngine {
         setWindowSize(width(), height());
     }
 
+    /**
+     * Update game physics etc.
+     * @param dt time since last update, measured in seconds.
+     */
     @Override
     public void update(double dt) {
         // Currently set to Space Bar (Maybe "Space" to place, "E" to blow up bombs?).
@@ -46,6 +50,9 @@ public class Main extends GameEngine {
         }
     }
 
+    /**
+     * Update game graphics etc.
+     */
     @Override
     public void paintComponent() {
         switch (gameState) {
