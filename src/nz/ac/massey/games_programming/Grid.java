@@ -117,6 +117,8 @@ public class Grid {
         private void drawContents(GameEngine engine, int x_offset, int y_offset) {
             if (this.prop != null) {
                 this.prop.draw(engine, x_offset, y_offset, Cell.CELL_WIDTH, Cell.CELL_HEIGHT);
+            } else {
+                engine.drawText(x_offset, (y_offset + CELL_WIDTH), "C");
             }
         }
 
