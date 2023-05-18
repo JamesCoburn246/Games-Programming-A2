@@ -13,13 +13,11 @@ import java.awt.event.MouseEvent;
 public class Main extends GameEngine {
 
     private static final Color lightBlue = new Color(65, 77, 100);
-
-
-
-
     private static final int GRID_WIDTH = 20, GRID_HEIGHT = 20;
     private final Grid grid = new Grid(GRID_WIDTH, GRID_HEIGHT);
-    public GameState gameState = GameState.MAIN_MENU;
+    public GameState.State gameState = GameState.State.MAIN_MENU;
+    /// Loading Music Files
+
 
     // Manages user keyboard input
     int keyPressed;
@@ -35,39 +33,24 @@ public class Main extends GameEngine {
         mWidth = grid.determineScreenWidth();
         mHeight = grid.determineScreenHeight();
         setWindowSize(width(), height());
+        // Sets Initial Game State and Outputs to Console
+        GameState gameState = new GameState();
+        gameState.setGameState(GameState.State.MAIN_MENU);
+        GameState.State currentState = gameState.getGameState();
+        System.out.println("Game State: " + currentState);
     }
 
     @Override
     public void update(double dt) {
-        // MENU AND IN-GAME MUSIC //
-        if (gameState == GameState.MAIN_MENU) {
-            AudioClip MenuMusic = loadAudio("Sounds/MenuMusic.wav");
-            startAudioLoop(MenuMusic, 20);
-            if (gameState == GameState.PLAYING) {
-                stopAudioLoop(MenuMusic);
-            }
-        }
-        if (gameState == GameState.PLAYING) {
-            AudioClip GameStart = loadAudio("Sounds/GameStart.wav");
-            playAudio(GameStart,50);
-            AudioClip GameMusic = loadAudio("Sounds/GameMusic.wav");
-            startAudioLoop(GameMusic, 20);
-            if (gameState == GameState.MAIN_MENU) {
-                stopAudioLoop(GameMusic);
-            }
-        }
-
-
-
-
         // Currently set to Space Bar (Maybe "Space" to place, "E" to blow up bombs?).
-        if (bombDropped && gameState == GameState.PLAYING) {
+        if (bombDropped && gameState == GameState.State.PLAYING) {
             int pointX = 500;  // Example,Change to currentPlayPos or whatever
             int pointY = 500;  // Example, currentPlayPos or whatever
             int cellIndex = grid.calculateGrid(width(), height(), pointX, pointY);
             System.out.println("Bomb Dropped At Grid Reference: " + cellIndex);
             bombDropped = false;
         }
+
 
     }
 
@@ -187,7 +170,7 @@ public class Main extends GameEngine {
         if (x > 570 && y > 190) {
             if (x < 716 && y < 270) {
                 System.out.println("Starting the game!");
-                gameState = GameState.PLAYING;
+                gameState = GameState.State.PLAYING;
                 // TO-DO: Add code that starts the game here
             }
         }
@@ -196,7 +179,7 @@ public class Main extends GameEngine {
         if (x > 570 && y > 340) {
             if (x < 710 && y < 410) {
                 System.out.println("Exiting game...");
-                gameState = GameState.GAME_OVER;
+                gameState = GameState.State.GAME_OVER;
                 System.exit(420);
                 mFrame.dispose();
                 mFrame.setVisible(false);
@@ -207,9 +190,39 @@ public class Main extends GameEngine {
         // System.out.println("Left click at position (" + x + ", " + y + ")"); // Use for debugging
     }
 
-    public enum GameState {
-        MAIN_MENU, PLAYING, PAUSED, GAME_OVER
+    public class GameState {
+        private State currentState;
+
+        // Game State Getter
+        public State getGameState() {
+            return currentState;
+        }
+
+        // GameState Setter - When the GameState changes the Audio changes along with it
+        public void setGameState(State state) {
+            currentState = state;
+            AudioClip MenuMusic = loadAudio("Sounds/MenuMusic.wav");
+            AudioClip GameMusic = loadAudio("Sounds/MenuMusic.wav");
+            AudioClip GameStart = loadAudio("Sounds/gameStart.wav");
+            if (currentState == State.MAIN_MENU) {
+                stopAudioLoop(GameMusic);
+                startAudioLoop(MenuMusic, 20);
+            }
+            if (currentState == State.PLAYING) {
+                stopAudioLoop(MenuMusic);
+                playAudio(GameStart);
+                startAudioLoop(GameMusic, 20);
+            }
+            if (currentState == State.PAUSED) {
+                stopAudioLoop(GameMusic);
+                startAudioLoop(MenuMusic, 20);
+            }
+        }
+
+        // Available Game States
+        public enum State {
+            MAIN_MENU, PLAYING, PAUSED, GAME_OVER
+        }
+
     }
-
-
 }
