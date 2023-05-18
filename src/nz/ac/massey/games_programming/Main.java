@@ -43,7 +43,7 @@ public class Main extends GameEngine {
     @Override
     public void update(double dt) {
         // Currently set to Space Bar (Maybe "Space" to place, "E" to blow up bombs?).
-        if (bombDropped && gameState == GameState.State.PLAYING) {
+        if (bombDropped && gameState.is(GameState.State.PLAYING)) {
             int pointX = 500;  // Example,Change to currentPlayPos or whatever
             int pointY = 500;  // Example, currentPlayPos or whatever
             int cellIndex = grid.calculateGrid(width(), height(), pointX, pointY);
@@ -217,6 +217,10 @@ public class Main extends GameEngine {
                 stopAudioLoop(GameMusic);
                 startAudioLoop(MenuMusic, 20);
             }
+        }
+
+        public boolean is(State state) {
+            return (this.currentState == state);
         }
 
         // Available Game States
