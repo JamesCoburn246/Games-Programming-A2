@@ -31,7 +31,6 @@ public class Main extends GameEngine {
         mHeight = grid.determineScreenHeight();
         setWindowSize(width(), height());
         // Sets Initial Game State and Outputs to Console
-        GameState gameState = new GameState();
         gameState.setGameState(GameState.State.MAIN_MENU);
         GameState.State currentState = gameState.getGameState();
         System.out.println("Game State: " + currentState);
@@ -53,8 +52,7 @@ public class Main extends GameEngine {
 
     @Override
     public void paintComponent() {
-        GameState.State currentState = gameState.getGameState();
-        switch (currentState) {
+        switch (gameState.getGameState()) {
             case MAIN_MENU -> {
                 paintMainMenu();
             }
