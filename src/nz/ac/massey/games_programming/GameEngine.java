@@ -706,7 +706,7 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
     }
 
     // Loads the AudioClip stored in the file specified by filename
-    public AudioClip loadAudio(String filename) {
+    public static AudioClip loadAudio(String filename) {
         try {
             // Open File
             File file = new File(filename);
