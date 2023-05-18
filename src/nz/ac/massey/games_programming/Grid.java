@@ -30,7 +30,7 @@ public class Grid {
             for (int row = 0; row < ROWS; row++) {
                 int x_offset = COLS * Cell.CELL_WIDTH;
                 int y_offset = ROWS * Cell.CELL_HEIGHT;
-                cells[col][row].drawContents(engine, x_offset, y_offset, Cell.CELL_WIDTH, Cell.CELL_HEIGHT);
+                cells[col][row].drawContents(engine, x_offset, y_offset);
             }
         }
     }
@@ -90,9 +90,9 @@ public class Grid {
             this.prop = newContents;
         }
 
-        public void drawContents(GameEngine engine, int x_offset, int y_offset, int x_width, int y_width) {
+        private void drawContents(GameEngine engine, int x_offset, int y_offset) {
             if (this.prop != null) {
-                this.prop.draw(engine, x_offset, y_offset, x_width, y_width);
+                this.prop.draw(engine, x_offset, y_offset, Cell.CELL_WIDTH, Cell.CELL_HEIGHT);
             }
         }
 
