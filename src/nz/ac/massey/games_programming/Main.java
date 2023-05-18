@@ -15,10 +15,7 @@ public class Main extends GameEngine {
     private static final Color lightBlue = new Color(65, 77, 100);
     private static final int GRID_WIDTH = 20, GRID_HEIGHT = 20;
     private final Grid grid = new Grid(GRID_WIDTH, GRID_HEIGHT);
-    public GameState.State gameState = GameState.State.MAIN_MENU;
-    /// Loading Music Files
-
-
+    public GameState gameState = new GameState();
     // Manages user keyboard input
     int keyPressed;
     boolean bombDropped;
@@ -56,7 +53,8 @@ public class Main extends GameEngine {
 
     @Override
     public void paintComponent() {
-        switch (gameState) {
+        GameState.State currentState = gameState.getGameState();
+        switch (currentState) {
             case MAIN_MENU -> {
                 paintMainMenu();
             }
@@ -170,8 +168,9 @@ public class Main extends GameEngine {
         if (x > 570 && y > 190) {
             if (x < 716 && y < 270) {
                 System.out.println("Starting the game!");
-                gameState = GameState.State.PLAYING;
+                gameState.is(GameState.State.PLAYING);
                 // TO-DO: Add code that starts the game here
+
             }
         }
 
@@ -179,7 +178,7 @@ public class Main extends GameEngine {
         if (x > 570 && y > 340) {
             if (x < 710 && y < 410) {
                 System.out.println("Exiting game...");
-                gameState = GameState.State.GAME_OVER;
+                gameState.is(GameState.State.GAME_OVER);
                 System.exit(420);
                 mFrame.dispose();
                 mFrame.setVisible(false);
