@@ -29,6 +29,7 @@ public abstract class SpriteProp extends Prop implements Animatable {
         resetFrames();
     }
 
+    @Override
     public void resetFrames() {
         this.spriteIndex = 0;
     }

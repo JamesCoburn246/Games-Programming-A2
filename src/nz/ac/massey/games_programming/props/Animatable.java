@@ -7,6 +7,8 @@ import java.awt.*;
 public interface Animatable {
     void setSprites(Image[] sprite);
 
+    void resetFrames();
+
     void nextFrame();
 
     void outOfFrames();
