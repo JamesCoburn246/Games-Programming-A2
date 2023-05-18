@@ -3,16 +3,19 @@
 package nz.ac.massey.games_programming.props;
 
 import nz.ac.massey.games_programming.GameEngine;
+import nz.ac.massey.games_programming.Grid;
 
 public abstract class Prop {
 
     private final PropType TYPE;
     private final int GRID_X, GRID_Y;
+    private final Grid.Cell parent;
 
-    public Prop(PropType type, int x, int y) {
+    public Prop(PropType type, int x, int y, Grid.Cell parent) {
         this.TYPE = type;
         this.GRID_X = x;
         this.GRID_Y = y;
+        this.parent = parent;
     }
 
     public PropType getType() {
@@ -28,4 +31,7 @@ public abstract class Prop {
     }
 
     public abstract void draw(GameEngine engine, int x_offset, int y_offset, int x_width, int y_width);
+
+    protected void destroy() {
+    }
 }

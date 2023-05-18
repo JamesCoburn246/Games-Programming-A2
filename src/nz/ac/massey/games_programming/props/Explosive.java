@@ -12,7 +12,7 @@ public class Explosive extends SpriteProp {
     // Frame dimensions in the sprite sheet, measured in pixels.
     private static final int FRAME_WIDTH = 32, FRAME_HEIGHT = 32;
     // Frame count variables.
-    private static final int FUSE_FRAME_COUNT = 6, EXPLOSION_FIRST_FRAME = 7, EXPLOSION_FRAME_COUNT = 7;
+    private static final int FUSE_FRAME_COUNT = 6, EXPLOSION_FRAME_COUNT = 8;
     // Variables used to store animations in.
     private static final Image[] fuseAnimation = new Image[FUSE_FRAME_COUNT];
     private static final Image[] explosionAnimation = new Image[EXPLOSION_FRAME_COUNT];
@@ -23,8 +23,8 @@ public class Explosive extends SpriteProp {
         for (int i = 0; i < FUSE_FRAME_COUNT; i++) {
             fuseAnimation[i] = GameEngine.subImage(sprites, FRAME_WIDTH * i, 0, FRAME_WIDTH, FRAME_HEIGHT);
         }
-        for (int i = 0; i < FUSE_FRAME_COUNT; i++) {
-            explosionAnimation[i] = GameEngine.subImage(sprites, (FRAME_WIDTH * EXPLOSION_FIRST_FRAME) + (FRAME_WIDTH * i), 0, FRAME_WIDTH, FRAME_HEIGHT);
+        for (int i = 0; i < EXPLOSION_FRAME_COUNT; i++) {
+            explosionAnimation[i] = GameEngine.subImage(sprites, (FRAME_WIDTH * FUSE_FRAME_COUNT) + (FRAME_WIDTH * i), 0, FRAME_WIDTH, FRAME_HEIGHT);
         }
     }
 
@@ -64,7 +64,7 @@ public class Explosive extends SpriteProp {
             }
             // Remove reference to self, effectively self-destruct.
             case EXPLOSION -> {
-                super.cell.clearContents();
+                destroy();
             }
         }
     }
