@@ -45,8 +45,8 @@ public class Grid {
     public void drawAll(GameEngine engine) {
         for (int col = 0; col < COLS; col++) {
             for (int row = 0; row < ROWS; row++) {
-                int x_offset = COLS * Cell.CELL_WIDTH;
-                int y_offset = ROWS * Cell.CELL_HEIGHT;
+                int x_offset = col * Cell.CELL_WIDTH;
+                int y_offset = row * Cell.CELL_HEIGHT;
                 cells[col][row].drawContents(engine, x_offset, y_offset);
             }
         }
