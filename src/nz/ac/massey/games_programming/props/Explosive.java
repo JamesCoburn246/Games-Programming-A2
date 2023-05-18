@@ -31,7 +31,6 @@ public class Explosive extends SpriteProp {
 
     public Explosive(int x, int y, Grid.Cell cell) {
         super(PropType.EXPLOSIVE, x, y, cell);
-        this.durationPerFrame = 0.35;
         this.setSprites(fuseAnimation);
     }
 
@@ -68,6 +67,9 @@ public class Explosive extends SpriteProp {
         this.damage = damage;
         this.range = range;
         this.state = ExplosiveState.FUSE;
+        
+        // Calculate the animation speed for the fuse timing.
+        this.durationPerFrame = (double) fuse / FUSE_FRAME_COUNT;
     }
 
     private void triggerExplosion() {
