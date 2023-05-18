@@ -8,14 +8,8 @@ import java.awt.*;
 public class Explosive extends SpriteProp {
 
     private static final int FRAME_WIDTH = 32, FRAME_HEIGHT = 32, FUSE_FRAME_COUNT = 6, EXPLOSION_FRAME_COUNT = 8;
-    private static Image[] fuseAnimation = new Image[FUSE_FRAME_COUNT];
-    private static Image[] explosionAnimation = new Image[EXPLOSION_FRAME_COUNT];
-    private GameEngine engine;
-    private int initialFuse;
-    private int fuseRemaining;
-    private int damage;
-    private int range;
-    private ExplosiveState state = ExplosiveState.IDLE;
+    private static final Image[] fuseAnimation = new Image[FUSE_FRAME_COUNT];
+    private static final Image[] explosionAnimation = new Image[EXPLOSION_FRAME_COUNT];
 
     static {
         // Load animations.
@@ -27,6 +21,13 @@ public class Explosive extends SpriteProp {
             explosionAnimation[i] = GameEngine.subImage(sprites, FUSE_FRAME_COUNT + (FRAME_WIDTH * i), 0, FRAME_WIDTH, FRAME_HEIGHT);
         }
     }
+
+    private GameEngine engine;
+    private int initialFuse;
+    private int fuseRemaining;
+    private int damage;
+    private int range;
+    private ExplosiveState state = ExplosiveState.IDLE;
 
     public Explosive(int x, int y, Grid.Cell cell) {
         super(PropType.EXPLOSIVE, x, y, cell);
@@ -40,13 +41,6 @@ public class Explosive extends SpriteProp {
         if (state != ExplosiveState.IDLE) {
             super.update(dt);
         }
-    }
-
-    public void lightFuse(int fuse, int damage, int range) {
-        this.initialFuse = fuse;
-        this.damage = damage;
-        this.range = range;
-        this.state = ExplosiveState.FUSE;
     }
 
     @Override
@@ -66,6 +60,13 @@ public class Explosive extends SpriteProp {
             // Remove reference to self, effectively self-destruct.
             case EXPLODE -> super.cell.clearContents();
         }
+    }
+
+    public void lightFuse(int fuse, int damage, int range) {
+        this.initialFuse = fuse;
+        this.damage = damage;
+        this.range = range;
+        this.state = ExplosiveState.FUSE;
     }
 
     private enum ExplosiveState {
