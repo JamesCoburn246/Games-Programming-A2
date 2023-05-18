@@ -7,8 +7,9 @@ import java.awt.*;
 
 public class Explosive extends SpriteProp {
 
-    private static Image[] fuseAnimation;
-    private static Image[] explosionAnimation;
+    private static final int FRAME_WIDTH = 32, FRAME_HEIGHT = 32, FUSE_FRAME_COUNT = 6, EXPLOSION_FRAME_COUNT = 8;
+    private static Image[] fuseAnimation = new Image[FUSE_FRAME_COUNT];
+    private static Image[] explosionAnimation = new Image[EXPLOSION_FRAME_COUNT];
     private GameEngine engine;
     private int initialFuse;
     private int fuseRemaining;
@@ -17,9 +18,14 @@ public class Explosive extends SpriteProp {
     private ExplosiveState state = ExplosiveState.IDLE;
 
     static {
-        // TODO Load animations.
-        fuseAnimation = null;
-        explosionAnimation = null;
+        // Load animations.
+        Image sprites = GameEngine.loadImage("Images/Objects/BombAnimation.png");
+        for (int i = 0; i < FUSE_FRAME_COUNT; i++) {
+            fuseAnimation[i] = GameEngine.subImage(sprites, FRAME_WIDTH * i, 0, FRAME_WIDTH, FRAME_HEIGHT);
+        }
+        for (int i = 0; i < FUSE_FRAME_COUNT; i++) {
+            explosionAnimation[i] = GameEngine.subImage(sprites, FUSE_FRAME_COUNT + (FRAME_WIDTH * i), 0, FRAME_WIDTH, FRAME_HEIGHT);
+        }
     }
 
     public Explosive(int x, int y, Grid.Cell cell) {
