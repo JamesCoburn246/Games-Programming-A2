@@ -13,11 +13,9 @@ import java.awt.event.MouseEvent;
 public class Main extends GameEngine {
 
     private static final Color lightBlue = new Color(65, 77, 100);
-
     private static final int GRID_WIDTH = 20, GRID_HEIGHT = 20;
     private final Grid grid = new Grid(GRID_WIDTH, GRID_HEIGHT);
-    public GameState gameState = GameState.MAIN_MENU;
-
+    public GameState gameState;
     // Manages user keyboard input
     int keyPressed;
     boolean bombDropped;
@@ -32,6 +30,12 @@ public class Main extends GameEngine {
         mWidth = grid.determineScreenWidth();
         mHeight = grid.determineScreenHeight();
         setWindowSize(width(), height());
+        
+        // Sets initial GameState and outputs to console
+        this.gameState = new GameState(this);
+        gameState.setGameState(GameState.State.MAIN_MENU);
+        GameState.State currentState = gameState.getGameState();
+        System.out.println("Game State: " + currentState);
     }
 
     /**
@@ -41,14 +45,13 @@ public class Main extends GameEngine {
     @Override
     public void update(double dt) {
         // Currently set to Space Bar (Maybe "Space" to place, "E" to blow up bombs?).
-        if (bombDropped && gameState == GameState.PLAYING) {
+        if (bombDropped && gameState.is(GameState.State.PLAYING)) {
             int pointX = 500;  // Example,Change to currentPlayPos or whatever
             int pointY = 500;  // Example, currentPlayPos or whatever
             int cellIndex = grid.calculateGrid(width(), height(), pointX, pointY);
             System.out.println("Bomb Dropped At Grid Reference: " + cellIndex);
             bombDropped = false;
         }
-
 
         // Update animations.
         grid.updateAll(dt);
@@ -59,7 +62,7 @@ public class Main extends GameEngine {
      */
     @Override
     public void paintComponent() {
-        switch (gameState) {
+        switch (gameState.getGameState()) {
             case MAIN_MENU -> {
                 paintMainMenu();
             }
@@ -173,8 +176,9 @@ public class Main extends GameEngine {
         if (x > 570 && y > 190) {
             if (x < 716 && y < 270) {
                 System.out.println("Starting the game!");
-                gameState = GameState.PLAYING;
+                gameState.is(GameState.State.PLAYING);
                 // TO-DO: Add code that starts the game here
+
             }
         }
 
@@ -182,7 +186,7 @@ public class Main extends GameEngine {
         if (x > 570 && y > 340) {
             if (x < 710 && y < 410) {
                 System.out.println("Exiting game...");
-                gameState = GameState.GAME_OVER;
+                gameState.is(GameState.State.GAME_OVER);
                 System.exit(420);
                 mFrame.dispose();
                 mFrame.setVisible(false);
@@ -193,7 +197,5 @@ public class Main extends GameEngine {
         // System.out.println("Left click at position (" + x + ", " + y + ")"); // Use for debugging
     }
 
-    public enum GameState {
-        MAIN_MENU, PLAYING, PAUSED, GAME_OVER
-    }
+
 }
