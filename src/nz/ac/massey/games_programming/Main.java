@@ -162,7 +162,12 @@ public class Main extends GameEngine {
             // If user presses escape, display the main menu
             case KeyEvent.VK_ESCAPE -> {
                 System.out.println("KeyPressed: Esc");
-                paintMainMenu();
+                // Toggle between main menu and playing modes.
+                if (gameState.is(GameState.State.MAIN_MENU)) {
+                    gameState.setGameState(GameState.State.PLAYING);
+                } else if (gameState.is(GameState.State.PLAYING)) {
+                    gameState.setGameState(GameState.State.MAIN_MENU);
+                }
             }
         }
     }
