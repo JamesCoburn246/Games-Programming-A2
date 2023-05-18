@@ -6,6 +6,8 @@
 
 package nz.ac.massey.games_programming;
 
+import nz.ac.massey.games_programming.props.Explosive;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -30,6 +32,10 @@ public class Main extends GameEngine {
         mWidth = grid.determineScreenWidth();
         mHeight = grid.determineScreenHeight();
         setWindowSize(width(), height());
+
+        // Testing.
+        Grid.Cell cell = grid.getCell(0,0);
+        cell.setContents(new Explosive(0,0, cell));
         
         // Sets initial GameState and outputs to console
         this.gameState = new GameState(this);
@@ -145,8 +151,6 @@ public class Main extends GameEngine {
             // If user presses space
             case KeyEvent.VK_SPACE -> {
                 System.out.println("KeyPressed: Space");
-                bombDropped = true;
-
             }
             // If user presses E //// DROP BOMB
             case KeyEvent.VK_E -> {
