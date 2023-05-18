@@ -7,7 +7,13 @@ import java.awt.*;
 
 public class Explosive extends SpriteProp {
 
-    private static final int FRAME_WIDTH = 32, FRAME_HEIGHT = 32, FUSE_FRAME_COUNT = 6, EXPLOSION_FRAME_COUNT = 8;
+    // How long the animations should play, measured in seconds.
+    private static final float FUSE_ANIMATION_DURATION = 1.0F, EXPLOSION_ANIMATION_DURATION = 0.5F;
+    // Frame dimensions in the sprite sheet, measured in pixels.
+    private static final int FRAME_WIDTH = 32, FRAME_HEIGHT = 32;
+    // Frame count variables.
+    private static final int FUSE_FRAME_COUNT = 6, EXPLOSION_FIRST_FRAME = 7, EXPLOSION_FRAME_COUNT = 7;
+    // Variables used to store animations in.
     private static final Image[] fuseAnimation = new Image[FUSE_FRAME_COUNT];
     private static final Image[] explosionAnimation = new Image[EXPLOSION_FRAME_COUNT];
 
@@ -18,12 +24,11 @@ public class Explosive extends SpriteProp {
             fuseAnimation[i] = GameEngine.subImage(sprites, FRAME_WIDTH * i, 0, FRAME_WIDTH, FRAME_HEIGHT);
         }
         for (int i = 0; i < FUSE_FRAME_COUNT; i++) {
-            explosionAnimation[i] = GameEngine.subImage(sprites, FUSE_FRAME_COUNT + (FRAME_WIDTH * i), 0, FRAME_WIDTH, FRAME_HEIGHT);
+            explosionAnimation[i] = GameEngine.subImage(sprites, (FRAME_WIDTH * EXPLOSION_FIRST_FRAME) + (FRAME_WIDTH * i), 0, FRAME_WIDTH, FRAME_HEIGHT);
         }
     }
 
     private GameEngine engine;
-    private int initialFuse;
     private int fuseRemaining;
     private int damage;
     private int range;
@@ -51,32 +56,34 @@ public class Explosive extends SpriteProp {
                 System.exit(1);
             }
             // Change to the explosion animation.
-            case FUSE -> {
+            case COUNTDOWN -> {
                 this.setSprites(explosionAnimation);
                 this.spriteIndex = 0;
-                this.durationPerFrame = 0.35;
+                this.durationPerFrame = EXPLOSION_ANIMATION_DURATION / EXPLOSION_FRAME_COUNT;
                 this.triggerExplosion();
             }
             // Remove reference to self, effectively self-destruct.
-            case EXPLODE -> super.cell.clearContents();
+            case EXPLOSION -> {
+                super.cell.clearContents();
+            }
         }
     }
 
-    public void lightFuse(int fuse, int damage, int range) {
-        this.initialFuse = fuse;
+    public void lightFuse(int damage, int range) {
         this.damage = damage;
         this.range = range;
-        this.state = ExplosiveState.FUSE;
-        
+        this.state = ExplosiveState.COUNTDOWN;
+
         // Calculate the animation speed for the fuse timing.
-        this.durationPerFrame = (double) fuse / FUSE_FRAME_COUNT;
+        this.durationPerFrame = (double) FUSE_ANIMATION_DURATION / FUSE_FRAME_COUNT;
     }
 
     private void triggerExplosion() {
+        this.state = ExplosiveState.EXPLOSION;
         // TODO Implement.
     }
 
     private enum ExplosiveState {
-        IDLE, FUSE, EXPLODE
+        IDLE, COUNTDOWN, EXPLOSION
     }
 }
