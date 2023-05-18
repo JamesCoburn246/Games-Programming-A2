@@ -48,6 +48,10 @@ public class Main extends GameEngine {
             System.out.println("Bomb Dropped At Grid Reference: " + cellIndex);
             bombDropped = false;
         }
+
+
+        // Update animations.
+        grid.updateAll(dt);
     }
 
     /**
