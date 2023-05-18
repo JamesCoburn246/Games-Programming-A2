@@ -12,7 +12,7 @@ public abstract class SpriteProp extends Prop implements Animatable {
     protected Grid.Cell cell;
 
     // How long to display each frame of the animation, in seconds.
-    private final double ANIMATION_SPEED = 1.00;
+    protected double durationPerFrame = 1.00;
     private double animation_progress = 0;
 
     // References to image files.
@@ -20,7 +20,7 @@ public abstract class SpriteProp extends Prop implements Animatable {
     private Image[] sprites;
 
     // Animation tracking variable.
-    private int spriteIndex;
+    protected int spriteIndex;
 
     public SpriteProp(PropType type, int x, int y, Grid.Cell cell) {
         super(type, x, y);
@@ -42,8 +42,8 @@ public abstract class SpriteProp extends Prop implements Animatable {
         // Increment animation by time passed.
         animation_progress += dt;
         // If the current frame has finished, change to the next frame.
-        if (animation_progress >= ANIMATION_SPEED) {
-            animation_progress -= ANIMATION_SPEED;
+        if (animation_progress >= durationPerFrame) {
+            animation_progress -= durationPerFrame;
             nextFrame();
         }
     }
