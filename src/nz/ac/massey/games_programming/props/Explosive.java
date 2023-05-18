@@ -56,6 +56,7 @@ public class Explosive extends SpriteProp {
                 this.setSprites(explosionAnimation);
                 this.spriteIndex = 0;
                 this.durationPerFrame = 0.35;
+                this.triggerExplosion();
             }
             // Remove reference to self, effectively self-destruct.
             case EXPLODE -> super.cell.clearContents();
@@ -67,6 +68,10 @@ public class Explosive extends SpriteProp {
         this.damage = damage;
         this.range = range;
         this.state = ExplosiveState.FUSE;
+    }
+
+    private void triggerExplosion() {
+        // TODO Implement.
     }
 
     private enum ExplosiveState {
