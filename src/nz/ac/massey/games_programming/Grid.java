@@ -1,5 +1,6 @@
 package nz.ac.massey.games_programming;
 
+import nz.ac.massey.games_programming.props.Animatable;
 import nz.ac.massey.games_programming.props.Prop;
 
 public class Grid {
@@ -25,12 +26,28 @@ public class Grid {
         return cells[col][row];
     }
 
+    /**
+     * Update physics etc. for all cells and their props.
+     * @param dt the time passed since this was last called, measured in seconds.
+     */
+    public void updateAll(double dt) {
+        for (int col = 0; col < COLS; col++) {
+            for (int row = 0; row < ROWS; row++) {
+                cells[col][row].updateContents(dt);
+            }
+        }
+    }
+
+    /**
+     * Update graphics for all cells and their props.
+     * @param engine the engine used to draw.
+     */
     public void drawAll(GameEngine engine) {
         for (int col = 0; col < COLS; col++) {
             for (int row = 0; row < ROWS; row++) {
                 int x_offset = COLS * Cell.CELL_WIDTH;
                 int y_offset = ROWS * Cell.CELL_HEIGHT;
-                cells[col][row].drawContents(engine, x_offset, y_offset, Cell.CELL_WIDTH, Cell.CELL_HEIGHT);
+                cells[col][row].drawContents(engine, x_offset, y_offset);
             }
         }
     }
@@ -90,9 +107,16 @@ public class Grid {
             this.prop = newContents;
         }
 
-        public void drawContents(GameEngine engine, int x_offset, int y_offset, int x_width, int y_width) {
+        private void updateContents(double dt) {
+            // If the prop supports animations, update the animations.
+            if (this.prop instanceof Animatable) {
+                ((Animatable) this.prop).update(dt);
+            }
+        }
+
+        private void drawContents(GameEngine engine, int x_offset, int y_offset) {
             if (this.prop != null) {
-                this.prop.draw(engine, x_offset, y_offset, x_width, y_width);
+                this.prop.draw(engine, x_offset, y_offset, Cell.CELL_WIDTH, Cell.CELL_HEIGHT);
             }
         }
 
