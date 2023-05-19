@@ -2,7 +2,7 @@ package nz.ac.massey.games_programming;
 
 import nz.ac.massey.games_programming.props.Dirt;
 import nz.ac.massey.games_programming.props.Explosive;
-import nz.ac.massey.games_programming.props.Stone;
+import nz.ac.massey.games_programming.props.Rock;
 
 public class LevelManager {
 
@@ -58,7 +58,7 @@ public class LevelManager {
     private static void loadCellFromTemplate(Grid grid, char[][] level, int col, int row) {
         Grid.Cell cell = grid.getCell(col, row);
         switch (level[col][row]) {
-            case 'R' -> cell.setContents(new Stone(col, row, cell));
+            case 'R' -> cell.setContents(new Rock(col, row, cell));
             case 'D' -> cell.setContents(new Dirt(col, row, cell));
             case 'E' -> cell.setContents(new Explosive(col, row, cell));
             default -> cell.clearContents();

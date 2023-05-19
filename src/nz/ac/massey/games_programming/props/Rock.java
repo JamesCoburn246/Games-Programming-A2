@@ -5,7 +5,7 @@ import nz.ac.massey.games_programming.Grid;
 
 import java.awt.*;
 
-public class Stone extends Breakable {
+public class Rock extends Breakable {
 
     private static final int INITIAL_HEALTH = 3;
     private static final Image ROCK;
@@ -15,7 +15,7 @@ public class Stone extends Breakable {
         ROCK = GameEngine.subImage(sprites, 0, 0, 32, 32);
     }
 
-    public Stone(int x, int y, Grid.Cell cell) {
+    public Rock(int x, int y, Grid.Cell cell) {
         super(PropType.ROCK, x, y, cell, INITIAL_HEALTH);
         this.setSprite(ROCK);
     }
