@@ -17,6 +17,11 @@ public class Explosive extends SpriteProp {
     private static final Image[] fuseAnimation = new Image[FUSE_FRAME_COUNT];
     private static final Image[] explosionAnimation = new Image[EXPLOSION_FRAME_COUNT];
 
+    // How far in tiles should the explosion propagate. Possible to be improved later with gear, but is globally consistent.
+    public static int explosionRange;
+    // How much health to subtract from Breakable props that would be hit by an explosion.
+    private static int explosionDamage;
+
     static {
         // Load animations.
         Image sprites = GameEngine.loadImage("Images/Objects/BombAnimation.png");
@@ -28,15 +33,14 @@ public class Explosive extends SpriteProp {
         }
     }
 
-    private GameEngine engine;
+    private final Grid grid;
     private int fuseRemaining;
-    private int damage;
-    private int range;
     private ExplosiveState state = ExplosiveState.IDLE;
 
-    public Explosive(int x, int y, Grid.Cell cell) {
+    public Explosive(int x, int y, Grid.Cell cell, Grid grid) {
         super(PropType.EXPLOSIVE, x, y, cell);
         this.setSprites(fuseAnimation);
+        this.grid = grid;
     }
 
     @Override
@@ -69,9 +73,7 @@ public class Explosive extends SpriteProp {
         }
     }
 
-    public void lightFuse(int damage, int range) {
-        this.damage = damage;
-        this.range = range;
+    public void lightFuse() {
         this.state = ExplosiveState.COUNTDOWN;
 
         // Calculate the animation speed for the fuse timing.
