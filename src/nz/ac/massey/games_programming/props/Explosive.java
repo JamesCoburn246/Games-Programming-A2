@@ -2,6 +2,7 @@ package nz.ac.massey.games_programming.props;
 
 import nz.ac.massey.games_programming.GameEngine;
 import nz.ac.massey.games_programming.Grid;
+import nz.ac.massey.games_programming.util.CardinalDirection;
 
 import java.awt.*;
 
@@ -82,7 +83,38 @@ public class Explosive extends SpriteProp {
 
     private void triggerExplosion() {
         this.state = ExplosiveState.EXPLOSION;
-        // TODO Implement.
+        attemptToSpawnExplosion(CardinalDirection.UP);
+        attemptToSpawnExplosion(CardinalDirection.DOWN);
+        attemptToSpawnExplosion(CardinalDirection.LEFT);
+        attemptToSpawnExplosion(CardinalDirection.RIGHT);
+    }
+
+    private void attemptToSpawnExplosion(CardinalDirection cd) {
+        int x, y;
+        switch (cd) {
+            case UP -> {
+                x = getX();
+                y = (getY() - 1);
+            }
+            case DOWN -> {
+                x = getX();
+                y = (getY() + 1);
+            }
+            case LEFT -> {
+                x = (getX() - 1);
+                y = getY();
+            }
+            default -> {
+                x = (getX() + 1);
+                y = getY();
+            }
+        }
+        Grid.Cell target = grid.getCell(x, y);
+        if (target.getContents() instanceof Nothing) {
+            target.setContents(new Explosion(x, y, target, grid, cd, explosionDamage, explosionRange));
+        } else if (target.getContents() instanceof Breakable breakable) {
+            breakable.dealDamage(explosionDamage);
+        }
     }
 
     private enum ExplosiveState {
