@@ -3,6 +3,8 @@ package nz.ac.massey.games_programming;
 import nz.ac.massey.games_programming.props.Animatable;
 import nz.ac.massey.games_programming.props.Prop;
 
+import java.awt.*;
+
 public class Grid {
     public final int COLS, ROWS;
     private final Cell[][] cells;
@@ -118,6 +120,7 @@ public class Grid {
             if (this.prop != null) {
                 this.prop.draw(engine, x_offset, y_offset, Cell.CELL_WIDTH, Cell.CELL_HEIGHT);
             } else {
+                engine.changeColor(Color.LIGHT_GRAY);
                 engine.drawText(x_offset, (y_offset + CELL_WIDTH), "C");
             }
         }
