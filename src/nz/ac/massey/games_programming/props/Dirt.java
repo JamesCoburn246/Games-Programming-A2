@@ -8,5 +8,4 @@ public class Dirt extends Breakable {
     public Dirt(int x, int y, Grid.Cell cell) {
         super(PropType.DIRT, x, y, cell, INITIAL_HEALTH);
     }
-    }
 }
