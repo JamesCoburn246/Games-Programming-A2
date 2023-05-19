@@ -1,9 +1,28 @@
 package nz.ac.massey.games_programming.props;
 
+import nz.ac.massey.games_programming.GameEngine;
 import nz.ac.massey.games_programming.Grid;
 import nz.ac.massey.games_programming.util.CardinalDirection;
 
+import java.awt.*;
+
 public class Explosion extends SpriteProp {
+
+    // How long the animations should play, measured in seconds.
+    private static final float ANIMATION_DURATION = 1.0F;
+    // Frame dimensions in the sprite sheet, measured in pixels.
+    private static final int FRAME_WIDTH = 32, FRAME_HEIGHT = 32;
+    // Frame count variables.
+    private static final int FRAME_COUNT = 6;
+
+    private static final Image[] blastAnimation = new Image[FRAME_COUNT];
+
+    static {
+        Image sprites = GameEngine.loadImage("Images/Objects/Fire");
+        for (int i = 0; i < FRAME_COUNT; i++) {
+            blastAnimation[i] = GameEngine.subImage(sprites, FRAME_WIDTH * i, 0, FRAME_WIDTH, FRAME_HEIGHT);
+        }
+    }
 
     private final Grid grid;
     private final CardinalDirection direction;
@@ -16,6 +35,8 @@ public class Explosion extends SpriteProp {
         this.direction = direction;
         this.damage = damage;
         this.range = range;
+        this.setSprites(blastAnimation);
+        this.durationPerFrame = ANIMATION_DURATION / FRAME_COUNT;
     }
 
     @Override
