@@ -7,7 +7,7 @@ public class Breakable extends SpriteProp {
     private int health;
 
 
-    public Breakable(PropType type, int x, int y, int health, Grid.Cell cell) {
+    public Breakable(PropType type, int x, int y, Grid.Cell cell, int health) {
         super(type, x, y, cell);
         this.health = health;
     }
