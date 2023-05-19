@@ -156,9 +156,9 @@ public class Main extends GameEngine {
             // If user presses E //// DROP BOMB
             case KeyEvent.VK_E -> {
                 System.out.println("KeyPressed: E");
-                Grid.Cell cell = grid.getCell(0,0);
+                Grid.Cell cell = grid.getCell(3,3);
                 Explosive exp = (Explosive) cell.getContents();
-                exp.lightFuse(3, 3);
+                exp.lightFuse();
             }
             // If user presses escape, display the main menu
             case KeyEvent.VK_ESCAPE -> {
