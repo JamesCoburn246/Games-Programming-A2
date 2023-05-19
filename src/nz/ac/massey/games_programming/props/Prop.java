@@ -33,6 +33,6 @@ public abstract class Prop {
     public abstract void draw(GameEngine engine, int x_offset, int y_offset, int x_width, int y_height);
 
     protected void destroy() {
-        parent.clearContents();
+        parent.setContents(new Nothing(getX(), getY(), this.parent));
     }
 }
