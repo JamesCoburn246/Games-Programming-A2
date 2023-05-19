@@ -9,8 +9,6 @@ import java.awt.*;
 
 public abstract class SpriteProp extends Prop implements Animatable {
 
-    protected Grid.Cell cell;
-
     // How long to display each frame of the animation, in seconds.
     protected double durationPerFrame = 1.00;
     private double animation_progress = 0;
@@ -23,8 +21,7 @@ public abstract class SpriteProp extends Prop implements Animatable {
     protected int spriteIndex;
 
     public SpriteProp(PropType type, int x, int y, Grid.Cell cell) {
-        super(type, x, y);
-        this.cell = cell;
+        super(type, x, y, cell);
     }
 
     public void setSprite(Image sprite) {

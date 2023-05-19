@@ -40,6 +40,6 @@ public class Breakable extends SpriteProp {
     }
 
     public void outOfFrames() {
-        super.cell.clearContents();
+        destroy();
     }
 }
