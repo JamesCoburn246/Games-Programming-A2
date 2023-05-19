@@ -24,22 +24,13 @@ public class Player {
         String[] directions = {"up", "right", "down", "left"};
 
         for (String direction : directions) {
-            boolean moved = false;
-
-            switch (direction) {
-                case "up":
-                    moved = player.moveUp(grid); // Try to move the player UP in the grid
-                    break;
-                case "right":
-                    moved = player.moveRight(grid); // Try to move the player RIGHT in the grid
-                    break;
-                case "down":
-                    moved = player.moveDown(grid); // Try to move the player DOWN in the grid
-                    break;
-                case "left":
-                    moved = player.moveLeft(grid); // Try to move the player LEFT in the grid
-                    break;
-            }
+            boolean moved = switch (direction) {
+                case "up" -> player.moveUp(grid); // Try to move the player UP in the grid
+                case "right" -> player.moveRight(grid); // Try to move the player RIGHT in the grid
+                case "down" -> player.moveDown(grid); // Try to move the player DOWN in the grid
+                case "left" -> player.moveLeft(grid);
+                default -> false; // Try to move the player LEFT in the grid
+            };
 
             // If the player successfully moved, print the new position
             if (moved) {
