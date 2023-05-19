@@ -6,8 +6,10 @@ import java.awt.*;
 
 public class Stone extends Breakable {
 
-    public Stone(int x, int y, int health, Grid.Cell cell) {
-        super(PropType.ROCK, x, y, health, cell);
+    private static final int INITIAL_HEALTH = 3;
+
+    public Stone(int x, int y, Grid.Cell cell) {
+        super(PropType.ROCK, x, y, cell, INITIAL_HEALTH);
     }
 
 }
