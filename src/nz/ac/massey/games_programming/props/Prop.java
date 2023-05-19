@@ -30,7 +30,7 @@ public abstract class Prop {
         return GRID_Y;
     }
 
-    public abstract void draw(GameEngine engine, int x_offset, int y_offset, int x_width, int y_width);
+    public abstract void draw(GameEngine engine, int x_offset, int y_offset, int x_width, int y_height);
 
     protected void destroy() {
         parent.clearContents();
