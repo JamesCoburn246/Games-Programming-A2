@@ -15,8 +15,7 @@ import java.awt.event.MouseEvent;
 public class Main extends GameEngine {
 
     private static final Color lightBlue = new Color(65, 77, 100);
-    private static final int GRID_WIDTH = 20, GRID_HEIGHT = 20;
-    private final Grid grid = new Grid(GRID_WIDTH, GRID_HEIGHT);
+    private final Grid grid = new Grid(LevelManager.GRID_WIDTH, LevelManager.GRID_HEIGHT);
     public GameState gameState;
     // Manages user keyboard input
     int keyPressed;
@@ -33,9 +32,11 @@ public class Main extends GameEngine {
         mHeight = grid.determineScreenHeight();
         setWindowSize(width(), height());
 
-        // Testing.
-        Grid.Cell cell = grid.getCell(0,0);
-        cell.setContents(new Explosive(0,0, cell));
+//        // Testing.
+//        Grid.Cell cell = grid.getCell(0,0);
+//        cell.setContents(new Explosive(0,0, cell));
+
+        LevelManager.loadLevelIntoGrid(grid, LevelManager.GameLevel.ONE);
         
         // Sets initial GameState and outputs to console
         this.gameState = new GameState(this);
