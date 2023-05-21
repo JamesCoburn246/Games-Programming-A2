@@ -9,7 +9,7 @@ import java.awt.*;
 public class Explosion extends SpriteProp {
 
     // How long the animations should play, measured in seconds.
-    private static final float ANIMATION_DURATION = 1.0F;
+    private static final float ANIMATION_DURATION = 0.33F;
     // Frame dimensions in the sprite sheet, measured in pixels.
     private static final int FRAME_WIDTH = 32, FRAME_HEIGHT = 32;
     // Frame count variables.
@@ -18,7 +18,7 @@ public class Explosion extends SpriteProp {
     private static final Image[] blastAnimation = new Image[FRAME_COUNT];
 
     static {
-        Image sprites = GameEngine.loadImage("Images/Objects/Fire");
+        Image sprites = GameEngine.loadImage("Images/Objects/FireExplosion.png");
         for (int i = 0; i < FRAME_COUNT; i++) {
             blastAnimation[i] = GameEngine.subImage(sprites, FRAME_WIDTH * i, 0, FRAME_WIDTH, FRAME_HEIGHT);
         }
@@ -45,7 +45,7 @@ public class Explosion extends SpriteProp {
         super.outOfFrames();
 
         // Check if this is the last explosion in a stack.
-        if (range == 0)
+        if (range <= 1)
             return;
 
         // Get the next cell and check what is there.

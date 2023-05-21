@@ -19,9 +19,9 @@ public class Explosive extends SpriteProp {
     private static final Image[] explosionAnimation = new Image[EXPLOSION_FRAME_COUNT];
 
     // How far in tiles should the explosion propagate. Possible to be improved later with gear, but is globally consistent.
-    public static int explosionRange;
+    public static int explosionRange = 3;
     // How much health to subtract from Breakable props that would be hit by an explosion.
-    private static int explosionDamage;
+    private static int explosionDamage = 2;
 
     static {
         // Load animations.
