@@ -59,6 +59,11 @@ public abstract class SpriteProp extends Prop implements Animatable {
         }
     }
 
+    @Override
+    public void outOfFrames() {
+        destroy();
+    }
+
     public void draw(GameEngine engine, int x_offset, int y_offset, int x_width, int y_height) {
         if (sprites != null) {
             engine.drawImage(sprites[spriteIndex], x_offset, y_offset);
