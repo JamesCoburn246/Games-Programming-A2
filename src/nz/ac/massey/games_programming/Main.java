@@ -185,19 +185,17 @@ public class Main extends GameEngine {
             return;
         }
 
-        // If user clicks the Play button, start the game
-        if (x > 570 && y > 190) {
-            if (x < 716 && y < 270) {
+        // If player presses the Play button in the menu, game will start
+        if (x > 255 && x < 395 && y > 190 && y < 265) {
+            if (gameState.is(GameState.State.MAIN_MENU)) {
                 System.out.println("Starting the game!");
-                gameState.is(GameState.State.PLAYING);
-                // TO-DO: Add code that starts the game here
-
+                gameState.setGameState(GameState.State.PLAYING);
             }
         }
 
-        // If user clicks the Quit button, exit the game
-        if (x > 570 && y > 340) {
-            if (x < 710 && y < 410) {
+        // If player presses the Quit button in the menu, game will start
+        if (x > 250 && x < 385 && y > 340 && y < 405) {
+            if (gameState.is(GameState.State.MAIN_MENU)) {
                 System.out.println("Exiting game...");
                 gameState.is(GameState.State.GAME_OVER);
                 System.exit(420);
@@ -207,7 +205,7 @@ public class Main extends GameEngine {
         }
 
         // If the user left-clicks the screen, display that position
-        // System.out.println("Left click at position (" + x + ", " + y + ")"); // Use for debugging
+        System.out.println("Left click at position (" + x + ", " + y + ")"); // Use for debugging
     }
 
 
