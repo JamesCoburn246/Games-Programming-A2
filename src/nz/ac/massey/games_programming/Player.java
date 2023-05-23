@@ -1,9 +1,13 @@
 package nz.ac.massey.games_programming;
 
+import java.awt.*;
+
 public class Player {
     private int x, y; // x and y co-ordinate of the player
     private int explosiveCount;
     private int detonatorCount;
+    private Image spriteImage; // The image of the character
+    private Image playerSprite;
 
     public static void main(String[] args) {
         // 5x5 grid representing the game grid for testing
@@ -57,6 +61,13 @@ public class Player {
         this.y = startY;
         this.explosiveCount = 3; // Starting explosive count
         this.detonatorCount = 3; // Starting detonator count
+
+        spriteImage = GameEngine.loadImage("Images/Player/Character.png");
+        playerSprite = GameEngine.subImage(spriteImage, 0, 0, 32 , 32);
+    }
+
+    public void draw(GameEngine g) {
+        g.drawImage(playerSprite, x, y);
     }
 
     // Resets the explosives back to their starting values

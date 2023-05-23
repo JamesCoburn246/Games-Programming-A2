@@ -13,11 +13,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class Main extends GameEngine {
-
+    private Player player;
     private static final Color lightBlue = new Color(65, 77, 100);
     private final Grid grid = new Grid(LevelManager.GRID_WIDTH, LevelManager.GRID_HEIGHT);
     public GameState gameState;
-    // Manages user keyboard input
     int keyPressed;
     boolean bombDropped;
 
@@ -31,6 +30,8 @@ public class Main extends GameEngine {
         mWidth = grid.determineScreenWidth();
         mHeight = grid.determineScreenHeight();
         setWindowSize(width(), height());
+
+        player = new Player(200, 200); // Initial starting location of the player
 
 //        // Testing.
 //        Grid.Cell cell = grid.getCell(0,0);
@@ -57,7 +58,6 @@ public class Main extends GameEngine {
             System.out.println("Bomb Dropped At Grid Reference: " + cellIndex);
             bombDropped = false;
         }
-
         // Update animations.
         grid.updateAll(dt);
     }
@@ -107,7 +107,7 @@ public class Main extends GameEngine {
         grid.drawAll(this);
 
         // Draw the player.
-        // TODO Implement.
+        player.draw(this);
     }
 
     /**
@@ -205,6 +205,4 @@ public class Main extends GameEngine {
         // If the user left-clicks the screen, display that position
         System.out.println("Left click at position (" + x + ", " + y + ")"); // Use for debugging
     }
-
-
 }
