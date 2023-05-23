@@ -41,8 +41,6 @@ public class Main extends GameEngine {
         // Sets initial GameState and outputs to console
         this.gameState = new GameState(this);
         gameState.setGameState(GameState.State.MAIN_MENU);
-        GameState.State currentState = gameState.getGameState();
-        System.out.println("Game State: " + currentState);
     }
 
     /**

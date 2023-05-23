@@ -8,7 +8,7 @@ public class GameState {
 
     static {
         GameState.menuMusic = GameEngine.loadAudio("Sounds/MenuMusic.wav");
-        GameState.gameMusic = GameEngine.loadAudio("Sounds/MenuMusic.wav");
+        GameState.gameMusic = GameEngine.loadAudio("Sounds/gameMusic.wav");
         GameState.gameStart = GameEngine.loadAudio("Sounds/gameStart.wav");
     }
 
@@ -29,17 +29,21 @@ public class GameState {
         currentState = state;
         if (currentState == State.MAIN_MENU) {
             game.stopAudioLoop(gameMusic);
-            game.startAudioLoop(menuMusic, 20);
+            game.startAudioLoop(menuMusic, 10);
+            System.out.println("Game State Changed: " + currentState);
         }
         if (currentState == State.PLAYING) {
             game.stopAudioLoop(menuMusic);
             game.playAudio(gameStart);
-            game.startAudioLoop(gameMusic, 20);
+            game.startAudioLoop(gameMusic, 10);
+            System.out.println("Game State Changed: " + currentState);
         }
         if (currentState == State.PAUSED) {
             game.stopAudioLoop(gameMusic);
-            game.startAudioLoop(menuMusic, 20);
+            game.startAudioLoop(menuMusic, 10);
+            System.out.println("Game State Changed: " + currentState);
         }
+
     }
 
     public boolean is(State state) {
