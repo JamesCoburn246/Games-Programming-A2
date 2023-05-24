@@ -107,7 +107,7 @@ public class Main extends GameEngine {
         grid.drawAll(this);
 
         // Draw the player.
-        player.draw(this);
+        player.drawPlayer(this);
     }
 
     /**

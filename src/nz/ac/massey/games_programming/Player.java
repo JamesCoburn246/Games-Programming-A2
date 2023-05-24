@@ -66,7 +66,7 @@ public class Player {
         playerSprite = GameEngine.subImage(spriteImage, 0, 0, 32 , 32);
     }
 
-    public void draw(GameEngine g) {
+    public void drawPlayer(GameEngine g) {
         g.drawImage(playerSprite, x, y);
     }
 
