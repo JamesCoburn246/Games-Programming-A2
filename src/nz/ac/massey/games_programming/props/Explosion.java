@@ -39,6 +39,20 @@ public class Explosion extends SpriteProp {
         this.durationPerFrame = ANIMATION_DURATION / FRAME_COUNT;
     }
 
+    public static void explodeCell(Grid.Cell cell, Grid grid, CardinalDirection direction, int damage, int range) {
+        Prop nextProp = cell.getContents();
+        // Create a new explosion.
+        if (cell.getContents() instanceof Nothing) {
+            cell.setContents(new Explosion(nextProp.getX(), nextProp.getY(), cell, grid, direction, damage, range));
+            // Damage a breakable.
+        } else if (cell.getContents() instanceof Breakable breakable) {
+            breakable.dealDamage(damage);
+            // Trigger an explosive.
+        } else if (cell.getContents() instanceof Explosive explosive) {
+            explosive.lightFuse();
+        }
+    }
+
     @Override
     public void outOfFrames() {
         // Trigger the self-destruct.
@@ -50,17 +64,8 @@ public class Explosion extends SpriteProp {
 
         // Get the next cell and check what is there.
         Grid.Cell nextCell = getNextCell();
-        Prop nextProp = nextCell.getContents();
         // Create a new explosion.
-        if (nextProp instanceof Nothing) {
-            getNextCell().setContents(new Explosion(nextProp.getX(), nextProp.getY(), nextCell, grid, direction, damage, (range - 1)));
-        // Damage a breakable.
-        } else if (nextProp instanceof Breakable breakable) {
-            breakable.dealDamage(damage);
-        // Trigger an explosive.
-        } else if (nextProp instanceof Explosive explosive) {
-            explosive.lightFuse();
-        }
+        explodeCell(nextCell, grid, direction, damage, (range - 1));
     }
 
     private Grid.Cell getNextCell() {
