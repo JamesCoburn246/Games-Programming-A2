@@ -110,10 +110,15 @@ public class Explosive extends SpriteProp {
             }
         }
         Grid.Cell target = grid.getCell(x, y);
+        // Create a new explosion.
         if (target.getContents() instanceof Nothing) {
             target.setContents(new Explosion(x, y, target, grid, cd, explosionDamage, explosionRange));
+        // Damage a breakable.
         } else if (target.getContents() instanceof Breakable breakable) {
             breakable.dealDamage(explosionDamage);
+        // Trigger an explosive.
+        } else if (target.getContents() instanceof Explosive explosive) {
+            explosive.lightFuse();
         }
     }
 
