@@ -90,36 +90,17 @@ public class Explosive extends SpriteProp {
     }
 
     private void attemptToSpawnExplosion(CardinalDirection cd) {
-        int x, y;
+        // Determine what cell to spawn an explosion in.
+        Grid.Cell target;
         switch (cd) {
-            case UP -> {
-                x = getX();
-                y = (getY() - 1);
-            }
-            case DOWN -> {
-                x = getX();
-                y = (getY() + 1);
-            }
-            case LEFT -> {
-                x = (getX() - 1);
-                y = getY();
-            }
-            default -> {
-                x = (getX() + 1);
-                y = getY();
-            }
+            case UP -> target = grid.getCell(getX(), (getY() - 1));
+            case DOWN -> target = grid.getCell(getX(), (getY() + 1));
+            case LEFT -> target = grid.getCell((getX() - 1), getY());
+            default -> target = grid.getCell((getX() + 1), getY());
         }
-        Grid.Cell target = grid.getCell(x, y);
+
         // Create a new explosion.
-        if (target.getContents() instanceof Nothing) {
-            target.setContents(new Explosion(x, y, target, grid, cd, explosionDamage, explosionRange));
-        // Damage a breakable.
-        } else if (target.getContents() instanceof Breakable breakable) {
-            breakable.dealDamage(explosionDamage);
-        // Trigger an explosive.
-        } else if (target.getContents() instanceof Explosive explosive) {
-            explosive.lightFuse();
-        }
+        Explosion.explodeCell(target, grid, cd, explosionDamage, explosionRange);
     }
 
     private enum ExplosiveState {
