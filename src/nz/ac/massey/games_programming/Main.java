@@ -7,6 +7,8 @@
 package nz.ac.massey.games_programming;
 
 import nz.ac.massey.games_programming.props.Explosive;
+import nz.ac.massey.games_programming.props.Player;
+import nz.ac.massey.games_programming.props.PropType;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -30,8 +32,6 @@ public class Main extends GameEngine {
         mWidth = grid.determineScreenWidth();
         mHeight = grid.determineScreenHeight();
         setWindowSize(width(), height());
-
-        player = new Player(200, 200); // Initial starting location of the player
 
 //        // Testing.
 //        Grid.Cell cell = grid.getCell(0,0);
@@ -107,7 +107,6 @@ public class Main extends GameEngine {
         grid.drawAll(this);
 
         // Draw the player.
-        player.drawPlayer(this);
     }
 
     /**
