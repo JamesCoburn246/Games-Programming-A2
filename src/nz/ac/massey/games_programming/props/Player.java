@@ -25,8 +25,8 @@ public class Player extends SpriteProp {
         this.health = health;
         this.setSprite(playerSprite);
 
-        this.explosiveCount = 3;
-        this.detonatorCount = 3;
+        this.explosiveCount = 6;
+        this.detonatorCount = 2;
     }
 
     @Override
@@ -53,8 +53,8 @@ public class Player extends SpriteProp {
 
     // Resets the explosives back to their starting values
     public void resetExplosives() {
-        explosiveCount = 3;
-        detonatorCount = 3;
+        explosiveCount = 6;
+        detonatorCount = 2;
     }
 
     /**********************************************************************************
@@ -116,14 +116,6 @@ public class Player extends SpriteProp {
             return true;
         }
         return false;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public int getExplosiveCount() {
