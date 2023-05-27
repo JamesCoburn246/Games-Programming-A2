@@ -12,7 +12,7 @@ public class Player extends SpriteProp {
     private final Grid grid;
     private int explosiveCount;
     private int detonatorCount;
-    private final int health; // Could be changed to a boolean if we don't want multiple lives
+    private int health; // Could be changed to a boolean if we don't want multiple lives
 
     // The image of the character
     private static final Image spriteImage = GameEngine.loadImage("Images/Player/Character.png");
