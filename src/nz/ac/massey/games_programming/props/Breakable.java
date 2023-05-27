@@ -2,7 +2,7 @@ package nz.ac.massey.games_programming.props;
 
 import nz.ac.massey.games_programming.Grid;
 
-public class Breakable extends SpriteProp {
+public abstract class Breakable extends SpriteProp {
 
     private int health;
 
