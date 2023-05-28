@@ -88,6 +88,8 @@ public class Grid {
         return cellIndex;
     }
 
+
+
     public static class Cell {
 
         public static final int CELL_WIDTH = 32, CELL_HEIGHT = 32;

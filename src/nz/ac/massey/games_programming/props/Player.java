@@ -27,6 +27,8 @@ public class Player extends SpriteProp {
 
         this.explosiveCount = 6;
         this.detonatorCount = 2;
+        this.x = x;
+        this.y = y;
     }
 
     @Override
@@ -86,32 +88,33 @@ public class Player extends SpriteProp {
     * The functions will return FALSE if the player DID NOT move
      */
 
-    public boolean moveUp(int[][] grid) {
-        if (y - 1 >= 0 && grid[y - 1][x] == 0) {
+    public boolean moveUp(Grid grid) {
+        if (y - 1 >= 0 && grid.getCell(x,y-1).getContents() instanceof Nothing) {
             y--;
             return true;
         }
         return false;
     }
 
-    public boolean moveDown(int[][] grid) {
-        if (y + 1 < grid.length && grid[y + 1][x] == 0) {
+    public boolean moveDown(Grid grid) {
+        if (y + 1 < grid.ROWS && grid.getCell(x,y+1).getContents() instanceof Nothing) {
             y++;
             return true;
         }
         return false;
     }
 
-    public boolean moveLeft(int[][] grid) {
-        if (x - 1 >= 0 && grid[y][x - 1] == 0) {
+    public boolean moveLeft(Grid grid) {
+        if (x - 1 >= 0 && grid.getCell(x-1,y).getContents() instanceof Nothing) {
             x--;
             return true;
         }
         return false;
     }
 
-    public boolean moveRight(int[][] grid) {
-        if (x + 1 < grid[0].length && grid[y][x + 1] == 0) {
+    public boolean moveRight(Grid grid) {
+        // If player can move, move character
+        if (x + 1 < grid.COLS && grid.getCell(x+1,y).getContents() instanceof Nothing) {
             x++;
             return true;
         }
@@ -124,6 +127,10 @@ public class Player extends SpriteProp {
 
     public int getDetonatorCount() {
         return detonatorCount;
+    }
+
+    public void draw(GameEngine engine) {
+        draw(engine, x*32, y*32, 32, 32);
     }
 }
 

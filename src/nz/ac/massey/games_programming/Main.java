@@ -9,6 +9,7 @@ package nz.ac.massey.games_programming;
 import nz.ac.massey.games_programming.props.Explosive;
 import nz.ac.massey.games_programming.props.Player;
 import nz.ac.massey.games_programming.props.PropType;
+import nz.ac.massey.games_programming.util.CardinalDirection;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -32,6 +33,8 @@ public class Main extends GameEngine {
         mWidth = grid.determineScreenWidth();
         mHeight = grid.determineScreenHeight();
         setWindowSize(width(), height());
+
+        player = new Player(10, 10, grid.getCell(10,10), grid, CardinalDirection.UP, 2);
 
 //        // Testing.
 //        Grid.Cell cell = grid.getCell(0,0);
@@ -107,6 +110,7 @@ public class Main extends GameEngine {
         grid.drawAll(this);
 
         // Draw the player.
+        player.draw(this);
     }
 
     /**
@@ -127,21 +131,25 @@ public class Main extends GameEngine {
             // If user presses W or up arrow
             case KeyEvent.VK_W, KeyEvent.VK_UP -> {
                 System.out.println("KeyPressed: Up");
+                player.moveUp(grid);
                 keyPressed = 1;
             }
             // If user presses A or left arrow
             case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
                 System.out.println("KeyPressed: Left");
+                player.moveLeft(grid);
                 keyPressed = 2;
             }
             // If user presses S or down arrow
             case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
                 System.out.println("KeyPressed: Down");
+                player.moveDown(grid);
                 keyPressed = 3;
             }
             // If user presses D or right arrow
             case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
                 System.out.println("KeyPressed: Right");
+                player.moveRight(grid);
                 keyPressed = 4;
             }
 
