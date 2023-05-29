@@ -5,7 +5,7 @@ import nz.ac.massey.games_programming.Grid;
 
 import java.awt.*;
 
-public abstract class BombCrate extends Collectable {
+public class BombCrate extends Collectable {
     private static final Image BOMBCRATE;
 
     static {
