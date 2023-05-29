@@ -18,6 +18,15 @@ public class Player extends SpriteProp {
     private static final Image spriteImage = GameEngine.loadImage("Images/Player/Character.png");
     private static final Image playerSprite = GameEngine.subImage(spriteImage, 0, 0, 32 , 32);
 
+    // Get player cell co-ordinates
+    @Override
+    public int getX() { return x; }
+    @Override
+    public int getY() { return y; }
+
+    public int getExplosiveCount() { return explosiveCount; }
+    public int getDetonatorCount() { return detonatorCount; }
+
     public Player(int x, int y, Grid.Cell cell, Grid grid, CardinalDirection direction, int health) {
         super(PropType.PLAYER, x, y, cell);
         this.grid = grid;
@@ -88,45 +97,41 @@ public class Player extends SpriteProp {
     * The functions will return FALSE if the player DID NOT move
      */
 
-    public boolean moveUp(Grid grid) {
-        if (y - 1 >= 0 && grid.getCell(x,y-1).getContents() instanceof Nothing) {
+    public void moveUp(Grid grid) {
+        // If the cell above the character is empty or a collectable, move character 1 cell up
+        if (y-1 >= 0 && (grid.getCell(x,y-1).getContents() instanceof Nothing || grid.getCell(x,y-1).getContents() instanceof Collectable)) {
             y--;
-            return true;
         }
-        return false;
     }
 
-    public boolean moveDown(Grid grid) {
-        if (y + 1 < grid.ROWS && grid.getCell(x,y+1).getContents() instanceof Nothing) {
+    public void moveDown(Grid grid) {
+        // If the cell below the character is empty or a collectable, move character 1 cell down
+        if (y+1 < grid.ROWS && (grid.getCell(x,y+1).getContents() instanceof Nothing || grid.getCell(x,y+1).getContents() instanceof Collectable)) {
             y++;
-            return true;
         }
-        return false;
     }
 
-    public boolean moveLeft(Grid grid) {
-        if (x - 1 >= 0 && grid.getCell(x-1,y).getContents() instanceof Nothing) {
+    public void moveLeft(Grid grid) {
+        // If the cell to the left is empty or a collectable, move character 1 cell to the left
+        if (x-1 >= 0 && (grid.getCell(x-1,y).getContents() instanceof Nothing || grid.getCell(x-1,y).getContents() instanceof Collectable)) {
             x--;
-            return true;
         }
-        return false;
     }
 
-    public boolean moveRight(Grid grid) {
-        // If player can move, move character
-        if (x + 1 < grid.COLS && grid.getCell(x+1,y).getContents() instanceof Nothing) {
+    public void moveRight(Grid grid) {
+        // If the cell to the right is empty or a collectable, move character 1 cell to the right
+        if (x+1 < grid.COLS && (grid.getCell(x+1,y).getContents() instanceof Nothing || grid.getCell(x+1,y).getContents() instanceof Collectable)) {
             x++;
+        }
+    }
+
+    // Return true if player is standing on top of a collectable
+    public boolean isOnCollectable(Grid grid) {
+        if (grid.getCell(x,y).getContents() instanceof Collectable) {
+            System.out.println("Picked up collectable!");
             return true;
         }
         return false;
-    }
-
-    public int getExplosiveCount() {
-        return explosiveCount;
-    }
-
-    public int getDetonatorCount() {
-        return detonatorCount;
     }
 
     public void draw(GameEngine engine) {

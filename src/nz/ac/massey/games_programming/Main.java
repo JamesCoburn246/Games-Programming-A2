@@ -132,24 +132,28 @@ public class Main extends GameEngine {
             case KeyEvent.VK_W, KeyEvent.VK_UP -> {
                 System.out.println("KeyPressed: Up");
                 player.moveUp(grid);
+                player.isOnCollectable(grid);
                 keyPressed = 1;
             }
             // If user presses A or left arrow
             case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
                 System.out.println("KeyPressed: Left");
                 player.moveLeft(grid);
+                player.isOnCollectable(grid);
                 keyPressed = 2;
             }
             // If user presses S or down arrow
             case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
                 System.out.println("KeyPressed: Down");
                 player.moveDown(grid);
+                player.isOnCollectable(grid);
                 keyPressed = 3;
             }
             // If user presses D or right arrow
             case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
                 System.out.println("KeyPressed: Right");
                 player.moveRight(grid);
+                player.isOnCollectable(grid);
                 keyPressed = 4;
             }
 
