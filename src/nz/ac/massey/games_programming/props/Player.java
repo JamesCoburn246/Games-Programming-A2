@@ -31,7 +31,7 @@ public class Player extends SpriteProp {
     }
 
     public static Player getInstance(int x, int y, Grid.Cell cell, Grid grid, CardinalDirection direction, int health){
-        if (playerInstance == null){
+        if (playerInstance == null) {
             playerInstance = new Player(x, y, cell, grid, direction, health);
         }
         return playerInstance;
