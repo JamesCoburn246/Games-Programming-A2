@@ -13,10 +13,10 @@ public class BombCrate extends Collectable {
         Image bombSprite = GameEngine.loadImage("Images/Objects/BombCrate.png");
         BOMBCRATE = GameEngine.subImage(bombSprite, 0, 0, 32, 32);
     }
-    public BombCrate(PropType type, int x, int y, Grid.Cell cell, Player player) {
+    public BombCrate(PropType type, int x, int y, Grid.Cell cell) {
         super(type, x, y, cell);
         this.setSprite(BOMBCRATE);
-        this.player = player;
+        this.player = Player.getInstance(0, 0, null, null, null, 0);
     }
 
     // TO-DO: This needs to be overridden once the abstract onCollection is added
