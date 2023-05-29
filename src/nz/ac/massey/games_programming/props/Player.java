@@ -7,6 +7,7 @@ import nz.ac.massey.games_programming.util.CardinalDirection;
 import java.awt.*;
 
 public class Player extends SpriteProp {
+    private static Player playerInstance = null;
     private int x, y; // x and y co-ordinate of the player
     private final CardinalDirection direction;
     private final Grid grid;
@@ -18,7 +19,7 @@ public class Player extends SpriteProp {
     private static final Image spriteImage = GameEngine.loadImage("Images/Player/Character.png");
     private static final Image playerSprite = GameEngine.subImage(spriteImage, 0, 0, 32 , 32);
 
-    public Player(int x, int y, Grid.Cell cell, Grid grid, CardinalDirection direction, int health) {
+    private Player(int x, int y, Grid.Cell cell, Grid grid, CardinalDirection direction, int health) {
         super(PropType.PLAYER, x, y, cell);
         this.grid = grid;
         this.direction = direction;
@@ -27,6 +28,13 @@ public class Player extends SpriteProp {
 
         this.explosiveCount = 6;
         this.detonatorCount = 2;
+    }
+
+    public static Player getInstance(int x, int y, Grid.Cell cell, Grid grid, CardinalDirection direction, int health){
+        if (playerInstance == null){
+            playerInstance = new Player(x, y, cell, grid, direction, health);
+        }
+        return playerInstance;
     }
 
     @Override
