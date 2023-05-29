@@ -118,6 +118,14 @@ public class Player extends SpriteProp {
         return false;
     }
 
+    public void setExplosiveCount(int explosiveCount) {
+        this.explosiveCount = explosiveCount;
+    }
+
+    public void setDetonatorCount(int detonatorCount) {
+        this.detonatorCount = detonatorCount;
+    }
+
     public int getExplosiveCount() {
         return explosiveCount;
     }
