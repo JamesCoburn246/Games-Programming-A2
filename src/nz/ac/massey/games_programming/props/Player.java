@@ -68,34 +68,10 @@ public class Player extends SpriteProp {
         detonatorCount = 2;
     }
 
-    /**********************************************************************************
-     ************* Functions to check the explosive count for the player *************
-     * Return TRUE if the count is ABOVE ZERO and DECREMENT the count
-     * Otherwise, return FALSE
-     */
-    public boolean consumeExplosive() {
-        if (explosiveCount > 0) {
-            explosiveCount--;
-            return true;
-        }
-        return false;
-    }
 
-    // If player has more than 0 detonators, consume one
-    public boolean consumeDetonator() {
-        if (detonatorCount > 0) {
-            detonatorCount--;
-            return true;
-        }
-        return false;
-    }
-
-    /**********************************************************
-    ************* Functions to move the character *************
-    * If the cell is empty, move the player to the cell in the grid
-    * The functions will return TRUE if the player moved
-    * The functions will return FALSE if the player DID NOT move
-     */
+    /************ Functions to move the character *************
+    // If the cell is empty, move the player to the cell in the grid
+    //*/
 
     public void moveUp(Grid grid) {
         // If the cell above the character is empty or a collectable, move character 1 cell up
@@ -132,6 +108,16 @@ public class Player extends SpriteProp {
             return true;
         }
         return false;
+    }
+
+    // Decrease explosiveCount by 1
+    public void bombPlaced() {
+        explosiveCount--;
+    }
+
+    // Decrease detonatorCount by 1
+    public void detonatorUsed() {
+        detonatorCount--;
     }
 
     public void draw(GameEngine engine) {

@@ -6,9 +6,7 @@
 
 package nz.ac.massey.games_programming;
 
-import nz.ac.massey.games_programming.props.Explosive;
-import nz.ac.massey.games_programming.props.Player;
-import nz.ac.massey.games_programming.props.PropType;
+import nz.ac.massey.games_programming.props.*;
 import nz.ac.massey.games_programming.util.CardinalDirection;
 
 import java.awt.*;
@@ -158,16 +156,68 @@ public class Main extends GameEngine {
             }
 
             ///////// Special Keys - Interaction and Pause Menu /////////////
-            // If user presses space
+
+            // If user presses space //// PLACE BOMB
             case KeyEvent.VK_SPACE -> {
                 System.out.println("KeyPressed: Space");
+
+                if (gameState.is(GameState.State.PLAYING)) {
+                    // Places bomb on the same cell the player is standing on if not already standing on a bomb
+                    if (!(grid.getCell(player.getX(), player.getY()).getContents() instanceof Explosive)) {
+                        Grid.Cell cell = grid.getCell(player.getX(), player.getY());
+                        cell.setContents(new Explosive(player.getX(), player.getY(), cell, grid));
+
+                        // Decreases bombCount by 1
+                        player.bombPlaced();
+                        System.out.println("Bomb Placed!");
+                        System.out.println("Bombs remaining = " + player.getExplosiveCount());
+                    }
+                    else {
+                        System.out.println("Player is already standing on a bomb!");
+                    }
+                }
             }
-            // If user presses E //// DROP BOMB
-            case KeyEvent.VK_E -> {
-                System.out.println("KeyPressed: E");
-                Grid.Cell cell = grid.getCell(3,3);
-                Explosive exp = (Explosive) cell.getContents();
-                exp.lightFuse();
+
+            // If user presses Q //// DETONATE BOMB IF PLAYER IS ADJACENT TO BOMB
+            case KeyEvent.VK_Q -> {
+                System.out.println("KeyPressed: Q");
+
+                if (gameState.is(GameState.State.PLAYING)) {
+
+                    // Ignites all bombs adjacent to the player if they have a detonator (Order of checking: Right, Left, Below, Above)
+                    if (player.getDetonatorCount() > 0) {
+                        Grid.Cell cell;
+
+                        for (int i = 0; i < 4; i++) {
+
+                            if (i == 0) {
+                                cell = grid.getCell(player.getX() + 1, player.getY());
+                            }
+                            else if (i == 1) {
+                                cell = grid.getCell(player.getX() - 1, player.getY());
+                            }
+                            else if (i == 2) {
+                                cell = grid.getCell(player.getX(), player.getY() + 1);
+                            }
+                            else {
+                                cell = grid.getCell(player.getX(), player.getY() - 1);
+                            }
+
+                            if (cell.getContents().getType() == PropType.EXPLOSIVE) {
+                                System.out.println("Igniting bomb!");
+                                Explosive exp = (Explosive) cell.getContents();
+                                exp.lightFuse();
+
+                                // Decreases detonatorCount by 1
+                                player.detonatorUsed();
+                                System.out.println("Detonators remaining = " + player.getDetonatorCount());
+                            }
+                        }
+                    }
+                    else {
+                        System.out.println("No detonators remaining!");
+                    }
+                }
             }
             // If user presses escape, display the main menu
             case KeyEvent.VK_ESCAPE -> {
