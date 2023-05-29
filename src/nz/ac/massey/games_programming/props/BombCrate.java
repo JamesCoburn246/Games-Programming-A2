@@ -16,4 +16,11 @@ public class BombCrate extends Collectable {
         super(type, x, y, cell);
         this.setSprite(BOMBCRATE);
     }
+
+    // TO-DO: This needs to be overridden once the abstract onCollection is added
+    public void onCollection() {
+        // Add a bomb to the explosive count
+
+        // Play the sound of collecting the bomb crate
+    }
 }
