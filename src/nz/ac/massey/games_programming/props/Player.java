@@ -28,7 +28,7 @@ public class Player extends SpriteProp {
     public int getExplosiveCount() { return explosiveCount; }
     public int getDetonatorCount() { return detonatorCount; }
 
-    private Player(int x, int y, Grid.Cell cell, Grid grid, CardinalDirection direction, int health) {
+    public Player(int x, int y, Grid.Cell cell, Grid grid, CardinalDirection direction, int health) {
         super(PropType.PLAYER, x, y, cell);
         this.grid = grid;
         this.direction = direction;
@@ -125,6 +125,8 @@ public class Player extends SpriteProp {
     // Decrease detonatorCount by 1
     public void detonatorUsed() {
         detonatorCount--;
+    }
+
     public void addExplosive() {
         this.explosiveCount++;
     }
