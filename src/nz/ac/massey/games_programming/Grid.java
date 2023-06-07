@@ -50,7 +50,10 @@ public class Grid {
             for (int row = 0; row < ROWS; row++) {
                 int x_offset = col * Cell.CELL_WIDTH;
                 int y_offset = row * Cell.CELL_HEIGHT;
-                cells[col][row].drawContents(engine, x_offset, y_offset);
+
+                // Checks if the cell is on the edge, used to draw the edge tiles
+                boolean isEdge = (col == 0 || col == COLS - 1 || row == 0 || row == ROWS - 1);
+                cells[col][row].drawContents(engine, x_offset, y_offset, isEdge);
             }
         }
     }
@@ -95,6 +98,7 @@ public class Grid {
         public static final int CELL_WIDTH = 32, CELL_HEIGHT = 32;
 
         private Prop prop;
+        private static final Image GREYTILE, BLACKTILE, DARKGREYTILE;
 
         public Cell() {
             this(null);
@@ -112,6 +116,13 @@ public class Grid {
             this.prop = newContents;
         }
 
+        static {
+            Image tileSprites = GameEngine.loadImage("Images/Tiles/Tile-Sheet.png");
+            GREYTILE = GameEngine.subImage(tileSprites, 0, 0, 32, 32);
+            BLACKTILE = GameEngine.subImage(tileSprites, 32 * 4, 0, 32, 32);
+            DARKGREYTILE = GameEngine.subImage(tileSprites, 32, 0, 32, 32);
+        }
+
         private void updateContents(double dt) {
             // If the prop supports animations, update the animations.
             if (this.prop instanceof Animatable) {
@@ -119,9 +130,9 @@ public class Grid {
             }
         }
 
-        private void drawContents(GameEngine engine, int x_offset, int y_offset) {
+        private void drawContents(GameEngine engine, int x_offset, int y_offset, boolean isEdge) {
             // Draw the cell background.
-            engine.changeColor(Color.LIGHT_GRAY);
+            engine.drawImage(GREYTILE, x_offset, y_offset);
             engine.drawText(x_offset, (y_offset + CELL_WIDTH), "C");
 
             // Draw the prop.
