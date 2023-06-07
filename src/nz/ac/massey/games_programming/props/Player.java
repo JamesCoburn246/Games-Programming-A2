@@ -7,6 +7,7 @@ import nz.ac.massey.games_programming.util.CardinalDirection;
 import java.awt.*;
 
 public class Player extends SpriteProp {
+    private static Player playerInstance = null;
     private int x, y; // x and y co-ordinate of the player
     private final CardinalDirection direction;
     private final Grid grid;
@@ -27,7 +28,7 @@ public class Player extends SpriteProp {
     public int getExplosiveCount() { return explosiveCount; }
     public int getDetonatorCount() { return detonatorCount; }
 
-    public Player(int x, int y, Grid.Cell cell, Grid grid, CardinalDirection direction, int health) {
+    private Player(int x, int y, Grid.Cell cell, Grid grid, CardinalDirection direction, int health) {
         super(PropType.PLAYER, x, y, cell);
         this.grid = grid;
         this.direction = direction;
@@ -38,6 +39,13 @@ public class Player extends SpriteProp {
         this.detonatorCount = 2;
         this.x = x;
         this.y = y;
+    }
+
+    public static Player getInstance(int x, int y, Grid.Cell cell, Grid grid, CardinalDirection direction, int health) {
+        if (playerInstance == null){
+            playerInstance = new Player(x, y, cell, grid, direction, health);
+        }
+        return playerInstance;
     }
 
     @Override
@@ -109,7 +117,6 @@ public class Player extends SpriteProp {
         }
         return false;
     }
-
     // Decrease explosiveCount by 1
     public void bombPlaced() {
         explosiveCount--;
@@ -118,6 +125,20 @@ public class Player extends SpriteProp {
     // Decrease detonatorCount by 1
     public void detonatorUsed() {
         detonatorCount--;
+    public void addExplosive() {
+        this.explosiveCount++;
+    }
+
+    public void addDetonator() {
+        this.detonatorCount++;
+    }
+
+    public void setExplosiveCount(int explosiveCount) {
+        this.explosiveCount = explosiveCount;
+    }
+
+    public void setDetonatorCount(int detonatorCount) {
+        this.detonatorCount = detonatorCount;
     }
 
     public void draw(GameEngine engine) {
