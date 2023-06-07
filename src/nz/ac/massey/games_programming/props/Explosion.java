@@ -2,6 +2,7 @@ package nz.ac.massey.games_programming.props;
 
 import nz.ac.massey.games_programming.GameEngine;
 import nz.ac.massey.games_programming.Grid;
+import nz.ac.massey.games_programming.ScoreTracker;
 import nz.ac.massey.games_programming.util.CardinalDirection;
 
 import java.awt.*;
@@ -50,6 +51,8 @@ public class Explosion extends SpriteProp {
             // Trigger an explosive.
         } else if (cell.getContents() instanceof Explosive explosive) {
             explosive.lightFuse();
+        } else if (cell.getContents() instanceof Player) {
+            ScoreTracker.updateScore(-50); // Player loses points when hit
         }
     }
 
