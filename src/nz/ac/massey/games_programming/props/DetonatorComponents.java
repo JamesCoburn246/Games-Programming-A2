@@ -6,4 +6,9 @@ public class DetonatorComponents extends Collectable {
     public DetonatorComponents(PropType type, int x, int y, Grid.Cell cell) {
         super(type, x, y, cell);
     }
+
+    @Override
+    public void onCollection() {
+
+    }
 }
