@@ -123,7 +123,6 @@ public class Main extends GameEngine {
         int keyCode = e.getKeyCode();
 
         switch (keyCode) {
-            // TODO: Add character position change
             ///////// W A S D - Movement Keys /////////////
             ///////// Arrow Key - Movement Keys /////////////
             // If user presses W or up arrow
