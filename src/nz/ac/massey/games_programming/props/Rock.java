@@ -34,7 +34,7 @@ public class Rock extends Breakable {
     public boolean dealDamage(int damage) {
         boolean isDestroyed = super.dealDamage(damage);
         if (!isDestroyed) {
-            frameCounter++;
+            frameCounter += 2;
             if (frameCounter < FRAME_COUNT) {
                 this.setSprite(ROCK_CRACKING[frameCounter]);
             }
