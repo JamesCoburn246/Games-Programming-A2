@@ -19,7 +19,7 @@ public class BombCrate extends Collectable {
         this.player = Player.getInstance(0, 0, null, null, null, 0);
     }
 
-    // TO-DO: This needs to be overridden once the abstract onCollection is added
+    @Override
     public void onCollection() {
         // Add a bomb to the explosive count
         player.addExplosive();
