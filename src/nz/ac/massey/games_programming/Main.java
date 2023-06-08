@@ -20,6 +20,7 @@ public class Main extends GameEngine {
     public GameState gameState;
     int keyPressed;
     boolean bombDropped;
+    Image mainMenu = GameEngine.loadImage("Images/HUD/MainMenu3.png");
 
     public static void main(String[] args) {
         createGame(new Main(), 30);
@@ -86,14 +87,11 @@ public class Main extends GameEngine {
      * Paint the main menu screen that is used at the start of the game and when Esc is pressed.
      */
     private void paintMainMenu() {
-        // Reset background.
-        changeBackgroundColor(lightBlue);
-        clearBackground(width(), height());
 
-        // Play and Quit Buttons in black text
-        changeColor(Color.black);
-        drawCenteredText(250, "Play", "Arial", 65);
-        drawCenteredText(400, "Quit", "Arial", 65);
+
+        drawImage(mainMenu, 0, 0);
+
+
     }
 
     /**
@@ -245,7 +243,7 @@ public class Main extends GameEngine {
         }
 
         // If player presses the Play button in the menu, game will start
-        if (x > 255 && x < 395 && y > 190 && y < 265) {
+        if (x > 170 && x < 470 && y > 250 && y < 310) {
             if (gameState.is(GameState.State.MAIN_MENU)) {
                 System.out.println("Starting the game!");
                 gameState.setGameState(GameState.State.PLAYING);
@@ -253,7 +251,7 @@ public class Main extends GameEngine {
         }
 
         // If player presses the Quit button in the menu, game will start
-        if (x > 250 && x < 385 && y > 340 && y < 405) {
+        if (x > 175 && x < 470 && y > 340 && y < 400) {
             if (gameState.is(GameState.State.MAIN_MENU)) {
                 System.out.println("Exiting game...");
                 gameState.is(GameState.State.GAME_OVER);
