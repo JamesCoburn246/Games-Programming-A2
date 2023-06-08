@@ -50,5 +50,3 @@ public class Rock extends Breakable {
         this.destroy();
     }
 }
-
-
