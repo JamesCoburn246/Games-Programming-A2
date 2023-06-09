@@ -3,6 +3,7 @@ package nz.ac.massey.games_programming.props;
 import nz.ac.massey.games_programming.GameEngine;
 import nz.ac.massey.games_programming.Grid;
 import nz.ac.massey.games_programming.Main;
+import nz.ac.massey.games_programming.ScoreTracker;
 import nz.ac.massey.games_programming.util.CardinalDirection;
 
 import java.awt.*;
@@ -123,6 +124,7 @@ public class Player extends SpriteProp {
             }
             else if (grid.getCell(x,y).getContents() instanceof Gem) {
                 System.out.println("Picked up Gem!");
+                ScoreTracker.updateScore(10);
             }
             // Replace collectable with empty cell on pickup
             grid.getCell(x,y).setContents(new Nothing(x, y, grid.getCell(x,y)));

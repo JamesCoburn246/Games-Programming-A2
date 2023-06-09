@@ -81,6 +81,9 @@ public class Main extends GameEngine {
                 paintEndGameOverlay();
             }
         }
+        // TODO
+        changeColor(Color.black);
+        drawText(0, 30, ("Score: " + ScoreTracker.getScore()), "Arial", 30);
     }
 
     /**
