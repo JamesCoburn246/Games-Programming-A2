@@ -1,9 +1,6 @@
 package nz.ac.massey.games_programming;
 
-import nz.ac.massey.games_programming.props.Dirt;
-import nz.ac.massey.games_programming.props.Explosive;
-import nz.ac.massey.games_programming.props.Nothing;
-import nz.ac.massey.games_programming.props.Rock;
+import nz.ac.massey.games_programming.props.*;
 
 public class LevelManager {
 
@@ -27,8 +24,8 @@ public class LevelManager {
             {'R', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'D', '_', '_', '_', '_', '_', 'R'},
             {'R', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'R'},
             {'R', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'R'},
-            {'R', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'R'},
-            {'R', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'R'},
+            {'R', '_', '_', 'B', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'R'},
+            {'R', '_', '_', '_', 'B', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'R'},
             {'R', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'R'},
             {'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'}
     };
@@ -63,7 +60,9 @@ public class LevelManager {
             case 'R' -> cell.setContents(new Rock(col, row, cell));
             case 'D' -> cell.setContents(new Dirt(col, row, cell));
             case 'E' -> cell.setContents(new Explosive(col, row, cell, grid));
-            case 'G' -> cell.setContents(new ExplosiveComponents(col, row, cell, grid));        // TODO new gem
+            //case 'G' -> cell.setContents(new ExplosiveComponents(col, row, cell, grid));        // TODO new gem
+            case 'B' -> cell.setContents(new BombCrate(col, row, cell));                          // TODO new BombCrate
+            //case 'T' -> cell.setContents(new ExplosiveComponents(col, row, cell, grid));        // TODO new DetonatorCrate
             default -> cell.setContents(new Nothing(col, row, cell));
         }
     }

@@ -17,8 +17,8 @@ public class BombCrate extends Collectable {
         BOMBCRATE = GameEngine.subImage(bombSprite, 0, 0, 32, 32);
         pickup = GameEngine.loadAudio("PickUp.wav");
     }
-    public BombCrate(PropType type, int x, int y, Grid.Cell cell) {
-        super(type, x, y, cell);
+    public BombCrate(int x, int y, Grid.Cell cell) {
+        super(PropType.BOMBCRATE, x, y, cell);
         this.setSprite(BOMBCRATE);
         this.player = Player.getInstance(0, 0, null, null, null, 0);
     }
