@@ -117,11 +117,11 @@ public class Player extends SpriteProp {
                 System.out.println("Picked up Bomb!");
                 this.explosiveCount++;
             }
-            else if (grid.getCell(x,y).getContents() instanceof DetonatorCrate) {       // TODO detonator crate
+            else if (grid.getCell(x,y).getContents() instanceof DetonatorCrate) {
                 System.out.println("Picked up Detonator!");
                 this.detonatorCount++;
             }
-            else if (grid.getCell(x,y).getContents() instanceof Collectable) {       // TODO gem
+            else if (grid.getCell(x,y).getContents() instanceof Gem) {
                 System.out.println("Picked up Gem!");
             }
             // Replace collectable with empty cell on pickup

@@ -87,11 +87,7 @@ public class Main extends GameEngine {
      * Paint the main menu screen that is used at the start of the game and when Esc is pressed.
      */
     private void paintMainMenu() {
-
-
         drawImage(mainMenu, 0, 0);
-
-
     }
 
     /**
