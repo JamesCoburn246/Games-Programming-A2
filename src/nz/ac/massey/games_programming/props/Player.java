@@ -112,8 +112,17 @@ public class Player extends SpriteProp {
 
     // Return true if player is standing on top of a collectable
     public boolean isOnCollectable(Grid grid) {
-        if (grid.getCell(x,y).getContents() instanceof Collectable) {       // TODO doesn't work, items don't actually get picked up
-            System.out.println("Picked up collectable!");
+        if (grid.getCell(x,y).getContents() instanceof BombCrate) {
+            System.out.println("Picked up Bomb!");
+            this.explosiveCount++;
+            return true;
+        }
+        else if (grid.getCell(x,y).getContents() instanceof Collectable) {       // TODO detonator crate
+            System.out.println("Picked up Detonator crate!");
+            return true;
+        }
+        else if (grid.getCell(x,y).getContents() instanceof Collectable) {       // TODO gem
+            System.out.println("Picked up Gem!");
             return true;
         }
         return false;

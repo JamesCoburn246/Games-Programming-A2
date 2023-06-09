@@ -61,7 +61,7 @@ public class LevelManager {
             case 'D' -> cell.setContents(new Dirt(col, row, cell));
             case 'E' -> cell.setContents(new Explosive(col, row, cell, grid));
             //case 'G' -> cell.setContents(new ExplosiveComponents(col, row, cell, grid));        // TODO new gem
-            case 'B' -> cell.setContents(new BombCrate(col, row, cell));                          // TODO new BombCrate
+            case 'B' -> cell.setContents(new BombCrate(col, row, cell));
             //case 'T' -> cell.setContents(new ExplosiveComponents(col, row, cell, grid));        // TODO new DetonatorCrate
             default -> cell.setContents(new Nothing(col, row, cell));
         }
