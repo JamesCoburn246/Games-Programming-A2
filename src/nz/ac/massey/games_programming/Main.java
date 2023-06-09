@@ -162,13 +162,19 @@ public class Main extends GameEngine {
                 if (gameState.is(GameState.State.PLAYING)) {
                     // Places bomb on the same cell the player is standing on if not already standing on a bomb
                     if (!(grid.getCell(player.getX(), player.getY()).getContents() instanceof Explosive)) {
-                        Grid.Cell cell = grid.getCell(player.getX(), player.getY());
-                        cell.setContents(new Explosive(player.getX(), player.getY(), cell, grid));
+                        if (player.getExplosiveCount() > 0) {
+                            Grid.Cell cell = grid.getCell(player.getX(), player.getY());
+                            cell.setContents(new Explosive(player.getX(), player.getY(), cell, grid));
 
-                        // Decreases bombCount by 1
-                        player.bombPlaced();
-                        System.out.println("Bomb Placed!");
-                        System.out.println("Bombs remaining = " + player.getExplosiveCount());
+                            // Decreases bombCount by 1
+                            player.bombPlaced();
+                            System.out.println("Bomb Placed!");
+                            System.out.println("Bombs remaining = " + player.getExplosiveCount());
+                        }
+                        else {
+                            System.out.println("No explosives remaining!");
+                        }
+
                     }
                     else {
                         System.out.println("Player is already standing on a bomb!");
