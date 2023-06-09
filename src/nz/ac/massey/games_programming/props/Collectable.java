@@ -12,4 +12,5 @@ public abstract class Collectable extends SpriteProp {
     public void outOfFrames() {
         resetFrames();
     }
+    public abstract void onCollection();
 }

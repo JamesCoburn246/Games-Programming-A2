@@ -2,6 +2,8 @@ package nz.ac.massey.games_programming.props;
 
 import nz.ac.massey.games_programming.GameEngine;
 import nz.ac.massey.games_programming.Grid;
+import nz.ac.massey.games_programming.Main;
+import nz.ac.massey.games_programming.ScoreTracker;
 import nz.ac.massey.games_programming.util.CardinalDirection;
 
 import java.awt.*;
@@ -112,11 +114,25 @@ public class Player extends SpriteProp {
     // Return true if player is standing on top of a collectable
     public boolean isOnCollectable(Grid grid) {
         if (grid.getCell(x,y).getContents() instanceof Collectable) {
-            System.out.println("Picked up collectable!");
+            if (grid.getCell(x,y).getContents() instanceof BombCrate) {
+                System.out.println("Picked up Bomb!");
+                this.explosiveCount++;
+            }
+            else if (grid.getCell(x,y).getContents() instanceof DetonatorCrate) {
+                System.out.println("Picked up Detonator!");
+                this.detonatorCount++;
+            }
+            else if (grid.getCell(x,y).getContents() instanceof Gem) {
+                System.out.println("Picked up Gem!");
+                ScoreTracker.updateScore(10);
+            }
+            // Replace collectable with empty cell on pickup
+            grid.getCell(x,y).setContents(new Nothing(x, y, grid.getCell(x,y)));
             return true;
         }
         return false;
     }
+
     // Decrease explosiveCount by 1
     public void bombPlaced() {
         explosiveCount--;

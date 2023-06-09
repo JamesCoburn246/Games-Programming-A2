@@ -133,7 +133,7 @@ public class Grid {
         private void drawContents(GameEngine engine, int x_offset, int y_offset, boolean isEdge) {
             // Draw the cell background.
             engine.drawImage(GREYTILE, x_offset, y_offset);
-            engine.drawText(x_offset, (y_offset + CELL_WIDTH), "C");
+            engine.drawText(x_offset, (y_offset + CELL_WIDTH), "");
 
             // Draw the prop.
             if (!(this.prop instanceof Nothing)) {

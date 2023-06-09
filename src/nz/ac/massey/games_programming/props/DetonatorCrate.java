@@ -6,29 +6,29 @@ import nz.ac.massey.games_programming.Main;
 
 import java.awt.*;
 
-public class BombCrate extends Collectable {
-    private static final Image BOMBCRATE;
+public class DetonatorCrate extends Collectable {
+    private static final Image DETONATORCRATE;
     private static final GameEngine.AudioClip pickup;
     private final Player player;
     private Main game;
 
     static {
-        Image bombSprite = GameEngine.loadImage("Images/Objects/BombCrate.png");
-        BOMBCRATE = GameEngine.subImage(bombSprite, 0, 0, 32, 32);
+        Image detonatorSprite = GameEngine.loadImage("Images/Objects/DetonatorCrate.png");
+        DETONATORCRATE = GameEngine.subImage(detonatorSprite, 0, 0, 32, 32);
         pickup = GameEngine.loadAudio("PickUp.wav");
     }
-    public BombCrate(int x, int y, Grid.Cell cell) {
-        super(PropType.BOMBCRATE, x, y, cell);
-        this.setSprite(BOMBCRATE);
+    public DetonatorCrate(int x, int y, Grid.Cell cell) {
+        super(PropType.DETONATORCRATE, x, y, cell);
+        this.setSprite(DETONATORCRATE);
         this.player = Player.getInstance(0, 0, null, null, null, 0);
     }
 
     @Override
     public void onCollection() {
-        // Add a bomb to the explosive count
-        player.addExplosive();
+        // Add 1 detonator to detonator count
+        player.addDetonator();
 
-        // Play the sound of collecting the bomb crate
+        // Play the sound of collecting the detonator crate
         game.playAudio(pickup, 10);
     }
 }

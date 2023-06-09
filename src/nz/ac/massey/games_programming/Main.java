@@ -1,8 +1,8 @@
 // Games Programming A2 "Game"
-// Reece Bonnington
-// Pierce Grant
+// Reece Bonnington (15357959)
+// Pierce Grant (21018347)
 // Josh Cressey
-// James Coburn
+// James Coburn (19044568)
 
 package nz.ac.massey.games_programming;
 
@@ -20,6 +20,7 @@ public class Main extends GameEngine {
     public GameState gameState;
     int keyPressed;
     boolean bombDropped;
+    Image mainMenu = GameEngine.loadImage("Images/HUD/MainMenu3.png");
 
     public static void main(String[] args) {
         createGame(new Main(), 30);
@@ -74,26 +75,22 @@ public class Main extends GameEngine {
             }
             case PLAYING, PAUSED -> {
                 paintGame();
+                changeColor(Color.yellow);
+                drawText(0, 30, ("Score: " + ScoreTracker.getScore()), "Arial", 30);
             }
             case GAME_OVER -> {
                 paintGame();
                 paintEndGameOverlay();
             }
         }
+
     }
 
     /**
      * Paint the main menu screen that is used at the start of the game and when Esc is pressed.
      */
     private void paintMainMenu() {
-        // Reset background.
-        changeBackgroundColor(lightBlue);
-        clearBackground(width(), height());
-
-        // Play and Quit Buttons in black text
-        changeColor(Color.black);
-        drawCenteredText(250, "Play", "Arial", 65);
-        drawCenteredText(400, "Quit", "Arial", 65);
+        drawImage(mainMenu, 0, 0);
     }
 
     /**
@@ -145,43 +142,84 @@ public class Main extends GameEngine {
                 player.moveDown(grid);
                 player.isOnCollectable(grid);
                 keyPressed = 3;
+              
+        // Escape to toggle between menu and playing
+        if (keyCode == KeyEvent.VK_ESCAPE) {
+            System.out.println("KeyPressed: Esc");
+            // Toggle between main menu and playing modes.
+            if (gameState.is(GameState.State.MAIN_MENU)) {
+                gameState.setGameState(GameState.State.PLAYING);
             }
-            // If user presses D or right arrow
-            case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
-                System.out.println("KeyPressed: Right");
-                player.moveRight(grid);
-                player.isOnCollectable(grid);
-                keyPressed = 4;
+            else if (gameState.is(GameState.State.PLAYING)) {
+                gameState.setGameState(GameState.State.MAIN_MENU);
             }
+        }
+        // Other keyboard inputs are only acknowledged if player is not in the menu
+        else if (gameState.is(GameState.State.PLAYING)) {
+            switch (keyCode) {
 
-            ///////// Special Keys - Interaction and Pause Menu /////////////
+                ///////// W A S D - Movement Keys /////////////
+                ///////// Arrow Key - Movement Keys /////////////
+                // If user presses W or up arrow
+                case KeyEvent.VK_W, KeyEvent.VK_UP -> {
+                    System.out.println("KeyPressed: Up");
+                    player.moveUp(grid);
+                    player.isOnCollectable(grid);
+                    keyPressed = 1;
+                }
+                // If user presses A or left arrow
+                case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
+                    System.out.println("KeyPressed: Left");
+                    player.moveLeft(grid);
+                    player.isOnCollectable(grid);
+                    keyPressed = 2;
+                }
+                // If user presses S or down arrow
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
+                    System.out.println("KeyPressed: Down");
+                    player.moveDown(grid);
+                    player.isOnCollectable(grid);
+                    keyPressed = 3;
+                }
+                // If user presses D or right arrow
+                case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
+                    System.out.println("KeyPressed: Right");
+                    player.moveRight(grid);
+                    player.isOnCollectable(grid);
+                    keyPressed = 4;
+                }
 
-            // If user presses space //// PLACE BOMB
-            case KeyEvent.VK_SPACE -> {
-                System.out.println("KeyPressed: Space");
+                ///////// Special Keys - Interaction and Pause Menu /////////////
 
-                if (gameState.is(GameState.State.PLAYING)) {
+                // If user presses space //// PLACE BOMB
+                case KeyEvent.VK_SPACE -> {
+                    System.out.println("KeyPressed: Space");
+
                     // Places bomb on the same cell the player is standing on if not already standing on a bomb
                     if (!(grid.getCell(player.getX(), player.getY()).getContents() instanceof Explosive)) {
-                        Grid.Cell cell = grid.getCell(player.getX(), player.getY());
-                        cell.setContents(new Explosive(player.getX(), player.getY(), cell, grid));
+                        if (player.getExplosiveCount() > 0) {
+                            Grid.Cell cell = grid.getCell(player.getX(), player.getY());
+                            cell.setContents(new Explosive(player.getX(), player.getY(), cell, grid));
 
-                        // Decreases bombCount by 1
-                        player.bombPlaced();
-                        System.out.println("Bomb Placed!");
-                        System.out.println("Bombs remaining = " + player.getExplosiveCount());
+                            // Decreases bombCount by 1
+                            player.bombPlaced();
+                            System.out.println("Bomb Placed!");
+                            System.out.println("Bombs remaining = " + player.getExplosiveCount());
+                        }
+                        else {
+                            System.out.println("No explosives remaining!");
+                        }
+
                     }
                     else {
                         System.out.println("Player is already standing on a bomb!");
                     }
+
                 }
-            }
 
-            // If user presses Q //// DETONATE BOMB IF PLAYER IS ADJACENT TO BOMB
-            case KeyEvent.VK_Q -> {
-                System.out.println("KeyPressed: Q");
-
-                if (gameState.is(GameState.State.PLAYING)) {
+                // If user presses Q //// DETONATE BOMB IF PLAYER IS ADJACENT TO BOMB
+                case KeyEvent.VK_Q -> {
+                    System.out.println("KeyPressed: Q");
 
                     // Ignites all bombs adjacent to the player if they have a detonator (Order of checking: Right, Left, Below, Above)
                     if (player.getDetonatorCount() > 0) {
@@ -218,16 +256,6 @@ public class Main extends GameEngine {
                     }
                 }
             }
-            // If user presses escape, display the main menu
-            case KeyEvent.VK_ESCAPE -> {
-                System.out.println("KeyPressed: Esc");
-                // Toggle between main menu and playing modes.
-                if (gameState.is(GameState.State.MAIN_MENU)) {
-                    gameState.setGameState(GameState.State.PLAYING);
-                } else if (gameState.is(GameState.State.PLAYING)) {
-                    gameState.setGameState(GameState.State.MAIN_MENU);
-                }
-            }
         }
     }
 
@@ -244,7 +272,7 @@ public class Main extends GameEngine {
         }
 
         // If player presses the Play button in the menu, game will start
-        if (x > 255 && x < 395 && y > 190 && y < 265) {
+        if (x > 170 && x < 470 && y > 250 && y < 310) {
             if (gameState.is(GameState.State.MAIN_MENU)) {
                 System.out.println("Starting the game!");
                 gameState.setGameState(GameState.State.PLAYING);
@@ -252,7 +280,7 @@ public class Main extends GameEngine {
         }
 
         // If player presses the Quit button in the menu, game will start
-        if (x > 250 && x < 385 && y > 340 && y < 405) {
+        if (x > 175 && x < 470 && y > 340 && y < 400) {
             if (gameState.is(GameState.State.MAIN_MENU)) {
                 System.out.println("Exiting game...");
                 gameState.is(GameState.State.GAME_OVER);
