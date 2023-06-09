@@ -77,8 +77,8 @@ public class Main extends GameEngine {
                 paintGame();
                 changeColor(Color.GRAY);
                 drawSolidRectangle(0, 0, 32 * 4, 32);
-                changeColor(Color.yellow);
-                drawText(0, 30, ("Score: " + ScoreTracker.getScore()), "Arial", 30);
+                changeColor(Color.white);
+                drawText(5, 30, ("Score: " + ScoreTracker.getScore()), "Arial", 30);
             }
             case GAME_OVER -> {
                 paintGame();
@@ -140,28 +140,28 @@ public class Main extends GameEngine {
                 ///////// Arrow Key - Movement Keys /////////////
                 // If user presses W or up arrow
                 case KeyEvent.VK_W, KeyEvent.VK_UP -> {
-                    System.out.println("KeyPressed: Up");
+                    //System.out.println("KeyPressed: Up");
                     player.moveUp(grid);
                     player.isOnCollectable(grid);
                     keyPressed = 1;
                 }
                 // If user presses A or left arrow
                 case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
-                    System.out.println("KeyPressed: Left");
+                    //System.out.println("KeyPressed: Left");
                     player.moveLeft(grid);
                     player.isOnCollectable(grid);
                     keyPressed = 2;
                 }
                 // If user presses S or down arrow
                 case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
-                    System.out.println("KeyPressed: Down");
+                    //System.out.println("KeyPressed: Down");
                     player.moveDown(grid);
                     player.isOnCollectable(grid);
                     keyPressed = 3;
                 }
                 // If user presses D or right arrow
                 case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
-                    System.out.println("KeyPressed: Right");
+                    //System.out.println("KeyPressed: Right");
                     player.moveRight(grid);
                     player.isOnCollectable(grid);
                     keyPressed = 4;
