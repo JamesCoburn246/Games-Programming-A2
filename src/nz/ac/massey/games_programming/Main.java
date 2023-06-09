@@ -75,6 +75,8 @@ public class Main extends GameEngine {
             }
             case PLAYING, PAUSED -> {
                 paintGame();
+                changeColor(Color.GRAY);
+                drawSolidRectangle(0, 0, 32 * 4, 32);
                 changeColor(Color.yellow);
                 drawText(0, 30, ("Score: " + ScoreTracker.getScore()), "Arial", 30);
             }
