@@ -16,9 +16,12 @@
 * Reece Bonnington (15357959)
   * Main menu.
   * Sprite sheets/animation sheets.
+  * Player controls/movement.
+  * Collectable pickup logic https://github.com/JamesCoburn246/Games-Programming-A2/pull/52
 * Pierce Grant (21018347)
   * Explosive placement logic https://github.com/JamesCoburn246/Games-Programming-A2/pull/48
-  * Collectable pickup logic https://github.com/JamesCoburn246/Games-Programming-A2/pull/48
+  * Explosive detonation logic https://github.com/JamesCoburn246/Games-Programming-A2/pull/48
+  * Player controls/movement https://github.com/JamesCoburn246/Games-Programming-A2/pull/48
 * Josh Cressey ()
   * N/A.
 * James Coburn (19044568)
