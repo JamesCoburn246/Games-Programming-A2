@@ -117,8 +117,9 @@ public class Player extends SpriteProp {
             this.explosiveCount++;
             return true;
         }
-        else if (grid.getCell(x,y).getContents() instanceof Collectable) {       // TODO detonator crate
-            System.out.println("Picked up Detonator crate!");
+        else if (grid.getCell(x,y).getContents() instanceof DetonatorCrate) {       // TODO detonator crate
+            System.out.println("Picked up Detonator!");
+            this.detonatorCount++;
             return true;
         }
         else if (grid.getCell(x,y).getContents() instanceof Collectable) {       // TODO gem
