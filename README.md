@@ -22,7 +22,8 @@
   * Explosive placement logic https://github.com/JamesCoburn246/Games-Programming-A2/pull/48
   * Explosive detonation logic https://github.com/JamesCoburn246/Games-Programming-A2/pull/48
   * Player controls/movement https://github.com/JamesCoburn246/Games-Programming-A2/pull/48
-  * Picking up collectables code https://github.com/JamesCoburn246/Games-Programming-A2/commit/2fe94822793cb3842c33424b690967bdb28c73f7 & https://github.com/JamesCoburn246/Games-Programming-A2/commit/ff985a18e5a69983a73ea421719e70fb9a2763ba
+  * Picking up collectables code
+  * Score display
 * Josh Cressey ()
   * N/A.
 * James Coburn (19044568)
