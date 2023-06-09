@@ -24,7 +24,7 @@
   * Player controls/movement https://github.com/JamesCoburn246/Games-Programming-A2/pull/48
   * Picking up collectables code
   * Score display
-* Josh Cressey ()
+* Josh Cressey (21016238)
   * N/A.
 * James Coburn (19044568)
     * Parent classes and functionality for props https://github.com/JamesCoburn246/Games-Programming-A2/pull/12
