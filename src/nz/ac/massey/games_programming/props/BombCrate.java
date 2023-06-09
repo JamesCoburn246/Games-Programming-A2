@@ -29,6 +29,6 @@ public class BombCrate extends Collectable {
         player.addExplosive();
 
         // Play the sound of collecting the bomb crate
-        game.startAudioLoop(pickup, 10);
+        game.playAudio(pickup, 10);
     }
 }
