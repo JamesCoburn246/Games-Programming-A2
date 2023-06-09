@@ -27,6 +27,9 @@ public class Main extends GameEngine {
     }
 
     public void init() {
+        // Play game music
+        startAudioLoop(GameEngine.loadAudio("Sounds/gameMusic.wav"), 10);
+
         // Determine how wide the game window needs to be.
         // NOTE: This can be extended for elements outside the grid.
         mWidth = grid.determineScreenWidth();

@@ -24,23 +24,16 @@ public class GameState {
         return currentState;
     }
 
-    // GameState Setter - When the GameState changes the Audio changes along with it
+    // GameState Setter
     public void setGameState(State state) {
         currentState = state;
         if (currentState == State.MAIN_MENU) {
-            game.stopAudioLoop(gameMusic);
-            game.startAudioLoop(menuMusic, 10);
             System.out.println("Game State Changed: " + currentState);
         }
         if (currentState == State.PLAYING) {
-            game.stopAudioLoop(menuMusic);
-            game.playAudio(gameStart);
-            game.startAudioLoop(gameMusic, 10);
             System.out.println("Game State Changed: " + currentState);
         }
         if (currentState == State.PAUSED) {
-            game.stopAudioLoop(gameMusic);
-            game.startAudioLoop(menuMusic, 10);
             System.out.println("Game State Changed: " + currentState);
         }
 
