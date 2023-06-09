@@ -119,46 +119,58 @@ public class Main extends GameEngine {
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
-        switch (keyCode) {
-            // TODO: Add character position change
-            ///////// W A S D - Movement Keys /////////////
-            ///////// Arrow Key - Movement Keys /////////////
-            // If user presses W or up arrow
-            case KeyEvent.VK_W, KeyEvent.VK_UP -> {
-                System.out.println("KeyPressed: Up");
-                player.moveUp(grid);
-                player.isOnCollectable(grid);
-                keyPressed = 1;
+        // Escape to toggle between menu and playing
+        if (keyCode == KeyEvent.VK_ESCAPE) {
+            System.out.println("KeyPressed: Esc");
+            // Toggle between main menu and playing modes.
+            if (gameState.is(GameState.State.MAIN_MENU)) {
+                gameState.setGameState(GameState.State.PLAYING);
             }
-            // If user presses A or left arrow
-            case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
-                System.out.println("KeyPressed: Left");
-                player.moveLeft(grid);
-                player.isOnCollectable(grid);
-                keyPressed = 2;
+            else if (gameState.is(GameState.State.PLAYING)) {
+                gameState.setGameState(GameState.State.MAIN_MENU);
             }
-            // If user presses S or down arrow
-            case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
-                System.out.println("KeyPressed: Down");
-                player.moveDown(grid);
-                player.isOnCollectable(grid);
-                keyPressed = 3;
-            }
-            // If user presses D or right arrow
-            case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
-                System.out.println("KeyPressed: Right");
-                player.moveRight(grid);
-                player.isOnCollectable(grid);
-                keyPressed = 4;
-            }
+        }
+        // Other keyboard inputs are only acknowledged if player is not in the menu
+        else if (gameState.is(GameState.State.PLAYING)) {
+            switch (keyCode) {
 
-            ///////// Special Keys - Interaction and Pause Menu /////////////
+                ///////// W A S D - Movement Keys /////////////
+                ///////// Arrow Key - Movement Keys /////////////
+                // If user presses W or up arrow
+                case KeyEvent.VK_W, KeyEvent.VK_UP -> {
+                    System.out.println("KeyPressed: Up");
+                    player.moveUp(grid);
+                    player.isOnCollectable(grid);
+                    keyPressed = 1;
+                }
+                // If user presses A or left arrow
+                case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
+                    System.out.println("KeyPressed: Left");
+                    player.moveLeft(grid);
+                    player.isOnCollectable(grid);
+                    keyPressed = 2;
+                }
+                // If user presses S or down arrow
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
+                    System.out.println("KeyPressed: Down");
+                    player.moveDown(grid);
+                    player.isOnCollectable(grid);
+                    keyPressed = 3;
+                }
+                // If user presses D or right arrow
+                case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
+                    System.out.println("KeyPressed: Right");
+                    player.moveRight(grid);
+                    player.isOnCollectable(grid);
+                    keyPressed = 4;
+                }
 
-            // If user presses space //// PLACE BOMB
-            case KeyEvent.VK_SPACE -> {
-                System.out.println("KeyPressed: Space");
+                ///////// Special Keys - Interaction and Pause Menu /////////////
 
-                if (gameState.is(GameState.State.PLAYING)) {
+                // If user presses space //// PLACE BOMB
+                case KeyEvent.VK_SPACE -> {
+                    System.out.println("KeyPressed: Space");
+
                     // Places bomb on the same cell the player is standing on if not already standing on a bomb
                     if (!(grid.getCell(player.getX(), player.getY()).getContents() instanceof Explosive)) {
                         if (player.getExplosiveCount() > 0) {
@@ -178,14 +190,12 @@ public class Main extends GameEngine {
                     else {
                         System.out.println("Player is already standing on a bomb!");
                     }
+
                 }
-            }
 
-            // If user presses Q //// DETONATE BOMB IF PLAYER IS ADJACENT TO BOMB
-            case KeyEvent.VK_Q -> {
-                System.out.println("KeyPressed: Q");
-
-                if (gameState.is(GameState.State.PLAYING)) {
+                // If user presses Q //// DETONATE BOMB IF PLAYER IS ADJACENT TO BOMB
+                case KeyEvent.VK_Q -> {
+                    System.out.println("KeyPressed: Q");
 
                     // Ignites all bombs adjacent to the player if they have a detonator (Order of checking: Right, Left, Below, Above)
                     if (player.getDetonatorCount() > 0) {
@@ -220,16 +230,6 @@ public class Main extends GameEngine {
                     else {
                         System.out.println("No detonators remaining!");
                     }
-                }
-            }
-            // If user presses escape, display the main menu
-            case KeyEvent.VK_ESCAPE -> {
-                System.out.println("KeyPressed: Esc");
-                // Toggle between main menu and playing modes.
-                if (gameState.is(GameState.State.MAIN_MENU)) {
-                    gameState.setGameState(GameState.State.PLAYING);
-                } else if (gameState.is(GameState.State.PLAYING)) {
-                    gameState.setGameState(GameState.State.MAIN_MENU);
                 }
             }
         }
