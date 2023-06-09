@@ -119,30 +119,6 @@ public class Main extends GameEngine {
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
-        switch (keyCode) {
-            ///////// W A S D - Movement Keys /////////////
-            ///////// Arrow Key - Movement Keys /////////////
-            // If user presses W or up arrow
-            case KeyEvent.VK_W, KeyEvent.VK_UP -> {
-                System.out.println("KeyPressed: Up");
-                player.moveUp(grid);
-                player.isOnCollectable(grid);
-                keyPressed = 1;
-            }
-            // If user presses A or left arrow
-            case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
-                System.out.println("KeyPressed: Left");
-                player.moveLeft(grid);
-                player.isOnCollectable(grid);
-                keyPressed = 2;
-            }
-            // If user presses S or down arrow
-            case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
-                System.out.println("KeyPressed: Down");
-                player.moveDown(grid);
-                player.isOnCollectable(grid);
-                keyPressed = 3;
-              
         // Escape to toggle between menu and playing
         if (keyCode == KeyEvent.VK_ESCAPE) {
             System.out.println("KeyPressed: Esc");
