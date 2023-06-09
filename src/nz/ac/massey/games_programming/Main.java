@@ -75,15 +75,15 @@ public class Main extends GameEngine {
             }
             case PLAYING, PAUSED -> {
                 paintGame();
+                changeColor(Color.yellow);
+                drawText(0, 30, ("Score: " + ScoreTracker.getScore()), "Arial", 30);
             }
             case GAME_OVER -> {
                 paintGame();
                 paintEndGameOverlay();
             }
         }
-        // TODO
-        changeColor(Color.black);
-        drawText(0, 30, ("Score: " + ScoreTracker.getScore()), "Arial", 30);
+
     }
 
     /**
